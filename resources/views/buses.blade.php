@@ -4,9 +4,15 @@
 
 @section('title','السائقين')
 
+@section('logoutORback', route('showMainLayout'))
+
+@section('buttonText', 'عودة للقائمة الرئيسية')
+
 @section('titleOfBox','الحافلات المتوفرة ')
 
 @section('linkValue','إضافة حافلة جديدة')
+
+@section('route', route('busInfo'))
 
 @section('content')
     <p>هنا عرض الحافلات</p>

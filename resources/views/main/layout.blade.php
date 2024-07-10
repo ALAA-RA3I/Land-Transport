@@ -11,14 +11,14 @@
             <div class="sidebar">
                 <img src="Images/325459617_681733463736687_8393534721802801786_n.png">
                 <ul class="choises">
-                     <a href="#"><li>رحلات</li></a>
+                     <a href="{{ route ('showTripsSection') }}"><li>رحلات</li></a>
                      <a href="#"><li>رحلات مجدولة</li></a>
                      <a href="#"><li>الرحلات الحالية</li></a>
                      <a href="{{ route ('showBusSection') }}"><li>الحافلات</li></a>
                      <a href="#"><li>السائقين</li></a>
                 </ul>
-                <button >تسجيل خروج</button>
-            </div>
+                <a class="logout" href="@yield('logoutORback', '#')">@yield('buttonText', 'تسجيل الخروج')</a>
+                </div>
             <div class="navigation">
                 <ul class="links">
                     <a href="#"><li>رحلات</li></a>

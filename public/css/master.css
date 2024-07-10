@@ -70,7 +70,7 @@
     color: #010101;
 }
 
-.sidebar button{
+.sidebar .logout{
     background-color: #010101;
     color:#f8c62d ;
     outline: #f8c62d;
@@ -79,7 +79,9 @@
     transition: 0.3s;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
 }
+
 
 .sidebar button:hover{
     background-color: #f8c62d;
