@@ -17,10 +17,10 @@ return new class extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('bus_name');
             $table->string('model');
-            $table->enum('type', ["Vip","Normal"]);
+            $table->enum('type', ["Vip","عادي"]);
             $table->bigInteger('bus_number');
             $table->integer('chair_count');
-            $table->enum('form_type', ["A","B","C"]);
+            $table->enum('form_type', ["A","B"]);
             $table->integer('Branch_id');
             $table->foreign('Branch_id')->references('id')->on('branch');
         });

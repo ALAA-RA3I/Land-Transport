@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Bu extends Model
+class Bus extends Model
 {
 	protected $table = 'bus';
 	public $incrementing = false;
@@ -42,10 +42,10 @@ class Bu extends Model
 
 	protected $fillable = [
 		'bus_name',
+		'chair_count',
 		'model',
 		'type',
 		'bus_number',
-		'chair_count',
 		'form_type',
 		'Branch_id'
 	];

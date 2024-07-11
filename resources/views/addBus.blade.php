@@ -11,38 +11,51 @@
 
 @section('titleOfBox','قم بملئ معلومات الحافلة')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @section('content')
-    <form action="" method="POST">
-        <label for="">رقم الحافلة</label>
+    <form action=" {{route('recieveBusInfo')}} " method="POST">
+        <label for="bus_name">اسم الحافلة</label>
         <input  
-            type = "number"
-            name = "Bus-num"
+            type = "text"
+            name = "bus_name"
+            id="bus_name"
         >
-        <label for="">موديل الحافلة</label>
+        <label for="model">موديل الحافلة</label>
         <input 
             type = "text"
             name = "model"
+            id="model"
         >
         <label for="bus-service">خدمة الحافلة</label>
         <select 
             id="bus-service" 
-            name="bus_service"
+            name="type"
         >
-            <option value="normal">عادي</option>
-            <option value="vip">VIP</option>
+            <option value="عادي">عادي</option>
+            <option value="VIP">VIP</option>
         </select>
-        <label for="">رقم نمرة الحافلة </label>
+        <label for="bus_number">رقم الحافلة </label>
         <input 
             type = "number"
-            name = "nmra"
+            name = "bus_number"
+            id="bus_number"
         >
         <label for="seat">نموذج المقاعد</label>
         <div class="seat-option">
             <input 
                 type="radio" 
                 id="seat1" 
-                name="seat_model" 
-                value="model1"
+                name="form_type" 
+                value="A"
             >
             <label for="seat1">
                 <img src="Images/photo_2024-06-30_16-50-15.jpg" alt="نموذج المقاعد 1">
@@ -51,8 +64,8 @@
             <input 
                 type="radio" 
                 id="seat2" 
-                name="seat_model" 
-                value="model2"
+                name="form_type" 
+                value="B"
             >
             <label for="seat2">
                 <img src="Images/photo_2024-06-30_16-50-18.jpg" alt="نموذج المقاعد 2">

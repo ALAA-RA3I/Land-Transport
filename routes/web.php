@@ -21,5 +21,7 @@ Route::get('/trips', [interfaces::class, 'showTripsSection'])->name('showTripsSe
 Route::get('/addingBus', [Bus::class, 'addBusInfo'])->name('busInfo');
 Route::get('/addingexceptiontrip', [Trip::class, 'addExceptionTrip'])->name('addTripInfo');
 
+Route::post('/addBusInformation',[Bus::class,'busInformation'])->name('recieveBusInfo');
+
 
 
