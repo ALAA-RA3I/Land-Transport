@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\bus as RequestsBus;
+use App\Models\Branch;
 use App\Models\Bus as ModelsBus;
 
 class Bus extends Controller
@@ -12,7 +13,17 @@ class Bus extends Controller
     }
 
     public function busInformation(RequestsBus $request){
-        $validated = $request->validated();   
+        $request->validated();   
+        
+        if (!Branch::find(1)) {
+            Branch::create([
+                'id' => 1,
+                'name' =>'damas',
+                'office_address' => 'Temporary Branch',
+                'phone_number' => '099999999999999'
+            ]);
+        }
+
         $chairCount = 0;
         if($request->input('form_type') === 'A'){
             $chairCount = 28;
@@ -29,6 +40,6 @@ class Bus extends Controller
             'Branch_id' => 1
         ]);
 
-        return redirect()->route('showBusSection');
+        return redirect()->route('showBusSection')->with('success','تم إضافة حافلة جديدة بنجاح');
     }
 }

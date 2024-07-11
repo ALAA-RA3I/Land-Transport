@@ -12,17 +12,19 @@
 @section('titleOfBox','قم بملئ معلومات الحافلة')
 
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<script>
+    let errorMessages = '';
+    @foreach ($errors->all() as $error)
+        errorMessages += '{{ $error }}\n';
+    @endforeach
+    alert(errorMessages);
+</script>
 @endif
+
 
 @section('content')
     <form action=" {{route('recieveBusInfo')}} " method="POST">
+        @csrf
         <label for="bus_name">اسم الحافلة</label>
         <input  
             type = "text"

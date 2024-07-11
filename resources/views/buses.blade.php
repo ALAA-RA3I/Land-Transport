@@ -14,6 +14,13 @@
 
 @section('route', route('busInfo'))
 
+
+@if (session('success'))
+    <script>
+        alert('{{ session('success') }}');
+    </script>
+@endif
+
 @section('content')
     <p>هنا عرض الحافلات</p>
 @endsection
