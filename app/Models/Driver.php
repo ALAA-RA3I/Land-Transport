@@ -36,6 +36,10 @@ class Driver extends Model
 	public $incrementing = false;
 	public $timestamps = false;
 
+	public function getFullNameAttribute(){
+		return "{$this->Fname} {$this->Lname}";
+	}
+
 	protected $casts = [
 		'id' => 'int',
 		'hire_date' => 'datetime',

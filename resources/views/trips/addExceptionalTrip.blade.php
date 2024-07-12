@@ -51,7 +51,7 @@
             id="driver"
         >
         @foreach ($drivers as $driver)
-            <option value="{{ $driver->id }}">{{ $driver->Fname }}</option>
+            <option value="{{ $driver->id }}">{{ $driver->full_name}}</option>
         @endforeach
         </select>
         <label for="bus">اختر الحافلة</label>
