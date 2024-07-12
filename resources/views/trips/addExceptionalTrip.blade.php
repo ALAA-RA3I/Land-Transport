@@ -21,6 +21,8 @@
 </script>
 @endif
 
+
+
 @section('content')
     <form action="{{ route('recieveTripInfo') }}" method="POST">
         @csrf
@@ -49,7 +51,7 @@
             id="driver"
         >
         @foreach ($drivers as $driver)
-            <option value="{{$driver->id}}">{{ $driver->Fname }}</option>
+            <option value="{{ $driver->id }}">{{ $driver->Fname }}</option>
         @endforeach
         </select>
         <label for="bus">اختر الحافلة</label>
@@ -67,7 +69,7 @@
             id="from-to"
         >
         @foreach ($places as $place)
-            <option value="{{$place->id}}">{{$place->source}}</option>
+            <option value="{{ $place->id }}">{{$place->destination}}</option>
         @endforeach
         </select>
         <label for="cost">أدخل تكلفة المقعد</label>

@@ -12,20 +12,26 @@ class Trip extends Controller
 {
     public function addExceptionTrip(){
         $buses = Bus::all();
-        $place = FromTo::all();
+        $places = FromTo::all();
         $drivers = Driver::all();
-        return view('trips.addExceptionalTrip',[
-            'buses' => $buses,
-            'places' => $place,
-            'drivers' => $drivers
-        ]);
+        // dd(compact('buses','places','drivers'))
+        return view('trips.addExceptionalTrip')
+            ->with('buses',$buses)
+            ->with('places',$places)
+            ->with('drivers',$drivers);
     }
 
     public function exceptionalTripInformation(RequestsTrip $request) {
-
-        $bus=Bus::findOrFail($request->input('Bus_id'));
-
+        $bus = Bus::findOrFail($request->input('Bus_id'));
         $chair = $bus->chair_count;
+        $currentTrip = ModelsTrip::where('date', $request->input('date'))
+                    ->where('start_trip',$request->input('start_trip'))
+                    ->where('Bus_id', $request->input('Bus_id'))
+                    ->first();
+
+        if($currentTrip) {
+            return redirect()->back()->withErrors(['msg' => 'يوجد بالفعل رحلة بنفس وقت الانطلاق، التاريخ، ونفس الحافلة']);
+        }
 
         ModelsTrip::create([
             'date' => $request->input('date'),
@@ -40,7 +46,7 @@ class Trip extends Controller
             'trip_type' => 'exceptional'
         ]);
 
-        return view('trips.addExceptionalTrip')->with('success','تمت إضافة حافلة جديدة بنجاح');
+        return redirect()->route('showTripsSection')->with('good','تمت إضافة رحلة جديدة بنجاح');
     }
 
 }

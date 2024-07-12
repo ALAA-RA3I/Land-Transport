@@ -1,4 +1,21 @@
+@if (session('good'))
+    <script>
+        alert('{{ session('good') }}');
+    </script>
+@endif
 @extends('main.layout')
+
+
+
+@if ($errors->any())
+    <script>
+        let errorMessages = '';
+        @foreach ($errors->all() as $error)
+            errorMessages += '{{ $error }}\n';
+        @endforeach
+        alert(errorMessages);
+    </script>
+@endif
 
 @section('titleOfPage','الرحلات')
 
