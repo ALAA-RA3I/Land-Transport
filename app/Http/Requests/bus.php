@@ -34,9 +34,13 @@ class bus extends FormRequest
     {
         return [
             'bus_name.required' => 'اسم الحافلة مطلوب',
+            'bus_name.string' => 'اسم الحافلة يجب ان يكون نص',
             'model.required' => 'موديل الحافلة مطلوب',
+            'model.string' => 'موديل الحافلة يجب ان يكون نص',
             'type.required' => 'نوع الحافلة مطلوب',
+            'type.in' => 'نوع الحافلة يجب ان يكون (عادي أو vip)',
             'bus_number.required' => 'رقم الحافلة مطلوب',
+            'bus_number.numeric' => 'رقم الحافلة يجب ان يكون رقم',
             'bus_number.unique' => 'رقم الحافلة موجود مسبقاً',
             'bus_number.required' => 'رقم الحافلة مطلوب ',
             'form_type.required' => 'نوع النموذج مطلوب',

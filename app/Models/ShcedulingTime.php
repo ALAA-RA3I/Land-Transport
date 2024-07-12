@@ -62,9 +62,9 @@ class ShcedulingTime extends Model
 		return $this->belongsTo(Branch::class, 'Branch_id');
 	}
 
-	public function bu()
+	public function bus()
 	{
-		return $this->belongsTo(Bu::class, 'Bus_id');
+		return $this->belongsTo(Bus::class, 'Bus_id');
 	}
 
 	public function driver()

@@ -56,7 +56,6 @@ class Trip extends Model
 	];
 
 	protected $fillable = [
-		'trip_num',
 		'date',
 		'start_trip',
 		'end_trip',
@@ -65,19 +64,27 @@ class Trip extends Model
 		'From_To_id',
 		'Branch_id',
 		'cost',
-		'status',
 		'available_chair',
 		'trip_type'
 	];
+
+	protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->trip_num = Trip::max('trip_num') + 1;
+        });
+    }
 
 	public function branch()
 	{
 		return $this->belongsTo(Branch::class, 'Branch_id');
 	}
 
-	public function bu()
+	public function bus()
 	{
-		return $this->belongsTo(Bu::class, 'Bus_id');
+		return $this->belongsTo(Bus::class, 'Bus_id');
 	}
 
 	public function driver()

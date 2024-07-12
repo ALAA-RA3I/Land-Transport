@@ -50,7 +50,7 @@ class Branch extends Model
 
 	public function bus()
 	{
-		return $this->hasMany(Bu::class, 'Branch_id');
+		return $this->hasMany(Bus::class, 'Branch_id');
 	}
 
 	public function drivers()

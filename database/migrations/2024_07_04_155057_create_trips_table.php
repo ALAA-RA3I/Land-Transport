@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('trips', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->bigInteger('trip_num');
+            $table->bigInteger('trip_num')->startingValue(100);
             $table->date('date');
             $table->time('start_trip');
             $table->time('end_trip');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('Branch_id');
             $table->foreign('Branch_id')->references('id')->on('branch');
             $table->bigInteger('cost');
-            $table->enum('status', ["Done","Progress","Wait"]);
+            $table->enum('status', ["Done","Progress","Wait"])->default("Wait");
             $table->integer('available_chair');
             $table->enum('trip_type', ["scheduled","exceptional"]);
         });
