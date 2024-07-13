@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('titleOfPage', 'القائمة الرئيسية')</title>
+    <title>@yield('titleOfPage', 'MOAYAD')</title>
     <link href="{{asset('css/master.css')}}" rel="stylesheet"> 
 </head>
 <body>
@@ -11,7 +11,7 @@
             <div class="sidebar">
                 <img src="Images/325459617_681733463736687_8393534721802801786_n.png">
                 <ul class="choises">
-                     <a href="#"><li>رحلات</li></a>
+                     <a href="#"><li>MOAYAD</li></a>
                      <a href="#"><li>رحلات مجدولة</li></a>
                      <a href="#"><li>الرحلات الحالية</li></a>
                      <a href="{{ route ('showBusSection') }}"><li>الحافلات</li></a>
