@@ -1,4 +1,4 @@
-<a class="submit" href="{{ route('AddingBus')}}">@yield('linkValue','')</a>
+<a class="submit" href="@yield('route', '#')">@yield('linkValue', 'Default ')</a>
 
 <style>
     .submit{
