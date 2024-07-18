@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('mid_name');
             $table->string('last_name');
             $table->integer('chair_num');
-            $table->boolean('is_used');
-            $table->boolean('presence_travellet');
+            $table->boolean('is_used'); //default ('not-yet')
+            $table->boolean('presence_travellet'); //default('not-yet')
             $table->integer('age');
             $table->integer('Booking_id');
             $table->foreign('Booking_id')->references('id')->on('booking');

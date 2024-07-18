@@ -4,9 +4,10 @@
 use App\Http\Controllers\Manager\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\interfaces;
-use App\Http\Controllers\Bus;
-use App\Http\Controllers\Trip;
+use App\Http\Controllers\Bus\Bus;
+use App\Http\Controllers\Trip\Trip;
 use App\Models;
+
 /*
 Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/users', [UserController::class, 'users']);

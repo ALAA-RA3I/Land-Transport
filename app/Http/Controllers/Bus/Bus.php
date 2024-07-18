@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bus;
 
 use App\Http\Requests\bus as RequestsBus;
 use App\Models\Branch;
 use App\Models\Bus as ModelsBus;
+use App\Http\Controllers\Controller;
 
 class Bus extends Controller
 {
