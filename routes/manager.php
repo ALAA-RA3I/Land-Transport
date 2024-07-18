@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\interfaces;
 use App\Http\Controllers\Bus;
 use App\Http\Controllers\Trip;
+
 use App\Models;
 /*
 Route::group(['middleware' => ['auth:admin']], function() {
@@ -14,8 +15,14 @@ Route::group(['middleware' => ['auth:admin']], function() {
 
 
 
+
+
+
 Route::get('/login',[AuthController::class,'loginPage'])->name('loginPage');
-Route::post('/login',[AuthController::class,'login'])->name('doLogin');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+
 
 Route::get('/dashboard', [interfaces::class, 'shomMainLayout'])->name('showMainLayout');
 Route::get('/buses', [interfaces::class, 'showBusSection'])->name('showBusSection');

@@ -9,23 +9,21 @@
 <body>
 <div class="parent">
             <div class="sidebar">
-                <img src="Images/325459617_681733463736687_8393534721802801786_n.png">
+                <img src="{{url('images/325459617_681733463736687_8393534721802801786_n.png')}}">
                 <ul class="choises">
-<<<<<<< HEAD
                      <a href="#"><li>MOAYAD</li></a>
                      <a href="#"><li>رحلات مجدولة</li></a>
                      <a href="#"><li>الرحلات الحالية</li></a>
                      <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                      <a href="#"><li>السائقين</li></a>
-=======
                     <a href="{{ route ('showTripsSection') }}"><li>رحلات</li></a>
                     <a href="#"><li>رحلات مجدولة</li></a>
                     <a href="#"><li>الرحلات الحالية</li></a>
                     <a href="{{ route ('showBusSection') }}"><li>الحافلات</li></a>
                     <a href="#"><li>السائقين</li></a>
->>>>>>> de3852f60efd80aa168374e6766c5654bb7ddd9b
+
                 </ul>
-                <a class="logout" href="@yield('logoutORback', '#')">@yield('buttonText', 'تسجيل الخروج')</a>
+                <a class="logout" href="{{route('logout')}}">@yield('buttonText', 'تسجيل الخروج')</a>
                 </div>
             <div class="navigation">
                 <ul class="links">
@@ -40,7 +38,7 @@
                 </div>
                 @endif
                 @if (Request::is('main'))
-                    <img class="main" src="Images/لوغو زريق.png رمادي.png" alt="">
+                    <img class="main" src="images/لوغو زريق.png رمادي.png" alt="">
                 @endif
                 @hasSection('content')
                 <div class="content">
