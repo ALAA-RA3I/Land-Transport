@@ -36,15 +36,19 @@ return [
     */
 
     'guards' => [
-    'web' => [
+    'manager-web' => [
         'driver' => 'session',
-        'provider' => 'users',
+        'provider' => 'managers',
     ],
- 
-    'api' => [
+
+    'user-api' => [
         'driver' => 'passport',
         'provider' => 'users',
     ],
+        'driver-api' => [
+            'driver' => 'passport',
+            'provider' => 'drivers',
+        ],
 ],
 
     /*
@@ -68,6 +72,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Driver::class),
+        ],
+        'managers' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Manager::class),
         ],
 
         // 'users' => [

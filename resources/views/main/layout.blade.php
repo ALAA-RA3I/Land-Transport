@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('titleOfPage', 'MOAYAD')</title>
-    <link href="{{asset('css/master.css')}}" rel="stylesheet"> 
+    <link href="{{asset('css/master.css')}}" rel="stylesheet">
 </head>
 <body>
 <div class="parent">
@@ -15,7 +15,7 @@
                      <a href="#"><li>MOAYAD</li></a>
                      <a href="#"><li>رحلات مجدولة</li></a>
                      <a href="#"><li>الرحلات الحالية</li></a>
-                     <a href="{{ route ('showBusSection') }}"><li>الحافلات</li></a>
+                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                      <a href="#"><li>السائقين</li></a>
 =======
                     <a href="{{ route ('showTripsSection') }}"><li>رحلات</li></a>
@@ -45,7 +45,7 @@
                 @hasSection('content')
                 <div class="content">
                     @yield('content','')
-                </div>             
+                </div>
                 @endif
             </div>
         </div>
