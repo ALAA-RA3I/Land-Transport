@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Trip;
 
 use App\Http\Requests\trip as RequestsTrip;
 use App\Models\Bus;
 use App\Models\Driver;
 use App\Models\FromTo;
 use App\Models\Trip as ModelsTrip;
+use App\Http\Controllers\Controller;
 
 class Trip extends Controller
 {

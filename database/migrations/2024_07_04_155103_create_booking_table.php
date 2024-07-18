@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('User_id');
             $table->foreign('User_id')->references('id')->on('user');
-            $table->integer('Manager_id');
+            $table->integer('Manager_id');//should be Nullable
             $table->foreign('Manager_id')->references('id')->on('manager');
             $table->date('date_of_booking');
             $table->integer('num_tickets');
