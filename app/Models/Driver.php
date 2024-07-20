@@ -8,11 +8,15 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 
 /**
  * Class Driver
- * 
+ *
  * @property int $id
  * @property string $Fname
  * @property string $Lname
@@ -23,16 +27,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $birthday
  * @property int $year_experince
  * @property int $Branch_id
- * 
+ *
  * @property Branch $branch
  * @property Collection|ShcedulingTime[] $shceduling_times
  * @property Collection|Trip[] $trips
  *
  * @package App\Models
  */
-class Driver extends Model
+class Driver  extends Authenticatable
 {
-	protected $table = 'driver';
+    use HasApiTokens, HasFactory, Notifiable ;
+
+    protected $table = 'driver';
 	public $incrementing = false;
 	public $timestamps = false;
 

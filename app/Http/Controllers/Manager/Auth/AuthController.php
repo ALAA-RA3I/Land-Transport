@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Manager\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Manager;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash as FacadesHash;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class AuthController extends Controller
 {
@@ -12,6 +16,7 @@ class AuthController extends Controller
     {
 
     }
+
     public function loginPage(){
         return view('login');
     }
@@ -20,18 +25,16 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
-
-
+       if()
         if (Auth::guard('manager-web')->attempt($request->only('email', 'password'))) {
-
-            return redirect()->intended(route('showMainLayout'));
+            return redirect()->intended( route('showMainLayout') );
         }
-
-        return redirect()->back()->with('message',$validate);
+        return back()->with('message','Invalid email or password');
     }
+
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/manager/login');
     }
 }

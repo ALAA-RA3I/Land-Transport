@@ -8,11 +8,15 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 
 /**
  * Class Manager
- * 
+ *
  * @property int $id
  * @property string $Fname
  * @property string $Lname
@@ -21,14 +25,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $Branch_id
  * @property Carbon $hire_date
  * @property int $phone_number
- * 
+ *
  * @property Branch $branch
  * @property Collection|Booking[] $bookings
  *
  * @package App\Models
  */
-class Manager extends Model
+class Manager extends Authenticatable
+
 {
+    use  HasFactory, Notifiable ;
 	protected $table = 'manager';
 	public $incrementing = false;
 	public $timestamps = false;

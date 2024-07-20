@@ -18,3 +18,13 @@ Route::get('/hi', [AuthController::class, 'hi'])->name('hi');
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
 
+
+
+
+
+
+
+
+
+///////////// register manager account api for going on///////////////
+Route::post('/manage_store',[AuthController::class,'Manager_register'])->name('reg');

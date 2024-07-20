@@ -17,7 +17,7 @@
                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                     <a href="#"><li>السائقين</li></a>
                 </ul>
-                <a class="logout" href="@yield('logoutORback', '#')">@yield('buttonText', 'تسجيل الخروج')</a>
+                <a class="logout" href="{{route('logout')}}">@yield('buttonText', 'تسجيل الخروج')</a>
                 </div>
             <div class="navigation">
                 <ul class="links">
@@ -32,7 +32,7 @@
                 </div>
                 @endif
                 @if (Request::is('main'))
-                    <img class="main" src="Images/لوغو زريق.png رمادي.png" alt="">
+                    <img class="main" src="images/لوغو زريق.png رمادي.png" alt="">
                 @endif
                 @hasSection('content')
                 <div class="content">
