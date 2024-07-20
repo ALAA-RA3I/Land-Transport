@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('titleOfPage', 'MOAYAD')</title>
+    <title>@yield('titleOfPage', 'القائمة الرئيسية')</title>
     <link href="{{asset('css/master.css')}}" rel="stylesheet">
 </head>
 <body>
 <div class="parent">
             <div class="sidebar">
-                <img src="Images/325459617_681733463736687_8393534721802801786_n.png">
+                <img src="{{asset('Images/325459617_681733463736687_8393534721802801786_n.png')}}">
                 <ul class="choises">
-<<<<<<< HEAD
-                     <a href="#"><li>MOAYAD</li></a>
-                     <a href="#"><li>رحلات مجدولة</li></a>
-                     <a href="#"><li>الرحلات الحالية</li></a>
-                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
-                     <a href="#"><li>السائقين</li></a>
-=======
                     <a href="{{ route ('showTripsSection') }}"><li>رحلات</li></a>
                     <a href="#"><li>رحلات مجدولة</li></a>
                     <a href="#"><li>الرحلات الحالية</li></a>
-                    <a href="{{ route ('showBusSection') }}"><li>الحافلات</li></a>
+                    <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                     <a href="#"><li>السائقين</li></a>
->>>>>>> de3852f60efd80aa168374e6766c5654bb7ddd9b
                 </ul>
                 <a class="logout" href="@yield('logoutORback', '#')">@yield('buttonText', 'تسجيل الخروج')</a>
                 </div>

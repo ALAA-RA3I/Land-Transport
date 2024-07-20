@@ -17,10 +17,9 @@ return new class extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('User_id');
             $table->foreign('User_id')->references('id')->on('user');
-            $table->integer('Manager_id');//should be Nullable
+            $table->integer('Manager_id')->nullable();
             $table->foreign('Manager_id')->references('id')->on('manager');
             $table->date('date_of_booking');
-            $table->integer('num_tickets');
             $table->integer('Trip_id');
             $table->foreign('Trip_id')->references('id')->on('trips');
             $table->enum('booking_type', ["Electronic","Manual"]);

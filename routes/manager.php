@@ -5,7 +5,7 @@ use App\Http\Controllers\Manager\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\interfaces;
 use App\Http\Controllers\Bus\Bus;
-use App\Http\Controllers\Trip\Trip;
+use App\Http\Controllers\Trips\Trip;
 use App\Models;
 
 /*

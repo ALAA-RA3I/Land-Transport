@@ -60,7 +60,7 @@
                 value="A"
             >
             <label for="seat1">
-                <img src="Images/photo_2024-06-30_16-50-15.jpg" alt="نموذج المقاعد 1">
+                <img src="{{asset('Images/photo_2024-06-30_16-50-15.jpg')}}" alt="نموذج المقاعد 1">
                 <span>نموذج المقاعد 1</span>
             </label>
             <input 
@@ -70,7 +70,7 @@
                 value="B"
             >
             <label for="seat2">
-                <img src="Images/photo_2024-06-30_16-50-18.jpg" alt="نموذج المقاعد 2">
+                <img src="{{asset('Images/photo_2024-06-30_16-50-18.jpg')}}" alt="نموذج المقاعد 2">
                 <span>نموذج المقاعد 2</span>
             </label>
         </div>

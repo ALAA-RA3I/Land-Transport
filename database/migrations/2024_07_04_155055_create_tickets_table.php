@@ -15,13 +15,13 @@ return new class extends Migration
 
         Schema::create('tickets', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->bigInteger('tickets_num');
+            $table->string('tickets_num');
             $table->string('first_name');
             $table->string('mid_name');
             $table->string('last_name');
             $table->integer('chair_num');
-            $table->boolean('is_used'); //default ('not-yet')
-            $table->boolean('presence_travellet'); //default('not-yet')
+            $table->boolean('is_used'); 
+            $table->boolean('presence_travellet'); 
             $table->integer('age');
             $table->integer('Booking_id');
             $table->foreign('Booking_id')->references('id')->on('booking');

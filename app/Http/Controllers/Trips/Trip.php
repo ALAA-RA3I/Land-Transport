@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Trip;
+namespace App\Http\Controllers\Trips;
 
 use App\Http\Requests\trip as RequestsTrip;
 use App\Models\Bus;
