@@ -31,8 +31,8 @@
                     <p>@yield('titleOfBox','قم باختيار احد الروابط')</p>
                 </div>
                 @endif
-                @if (Request::is('main'))
-                    <img class="main" src="images/لوغو زريق.png رمادي.png" alt="">
+                @if (Request::is('manager/dashboard'))
+                    <img class="main" src="{{asset('Images/لوغو زريق.png رمادي.png')}}" alt="">
                 @endif
                 @hasSection('content')
                 <div class="content">
