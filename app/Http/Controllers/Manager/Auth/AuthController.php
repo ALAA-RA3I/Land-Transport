@@ -25,7 +25,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
-       if()
+    //    if()
         if (Auth::guard('manager-web')->attempt($request->only('email', 'password'))) {
             return redirect()->intended( route('showMainLayout') );
         }

@@ -17,7 +17,7 @@
                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                     <a href="#"><li>السائقين</li></a>
                 </ul>
-                <a class="logout" href="{{route('logout')}}">@yield('buttonText', 'تسجيل الخروج')</a>
+                <a class="logout" href="@yield('logoutORback',route('logout'))">@yield('buttonText', 'تسجيل الخروج')</a>
                 </div>
             <div class="navigation">
                 <ul class="links">
