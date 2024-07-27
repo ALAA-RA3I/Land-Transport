@@ -1,17 +1,24 @@
 <?php
 
 
-use App\Http\Controllers\Manager\Auth\AuthController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\interfaces;
-use App\Http\Controllers\Bus\Bus;
+use App\Http\Controllers\Manager\Auth\AuthController;
+use App\Http\Controllers\Manager\Bus;
+use App\Http\Controllers\Manager\Drivers;
 use App\Http\Controllers\Trips\Trip;
-use App\Models;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/users', [UserController::class, 'users']);
 });*/
+
+Route::get('/test', function() {
+    $user =   Auth::guard('manager-web')->user()->Branch_id;
+   return $user;
+});
+
 
 
 
@@ -22,6 +29,10 @@ Route::get('/login',[AuthController::class,'loginPage'])->name('loginPage');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
+////////////// access drivers by manager ////////////////
+Route::get('/drivers',[Drivers::class,'show_drivers'])->name('showDrivers');
+Route::get('/addNewDriver', [Drivers::class, 'addDriver'])->name('addDriver');
+Route::post('/storeDriver',[Drivers::class,'storeDriverInfo'])->name('storeDriver');
 
 
 Route::get('/dashboard', [interfaces::class, 'shomMainLayout'])->name('showMainLayout');

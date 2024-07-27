@@ -1,18 +1,20 @@
+
+
 @extends('main.layout')
 
-@section('titleOfPage','الحافلات')
+@section('titleOfPage','السائقين')
 
-@section('title','الحافلات')
+@section('title','السائقين')
 
 @section('logoutORback', route('showMainLayout'))
 
 @section('buttonText', 'عودة للقائمة الرئيسية')
 
-@section('titleOfBox','الحافلات المتوفرة ')
+@section('titleOfBox','سائقين الفرع ')
 
-@section('linkValue','إضافة حافلة جديدة')
+@section('linkValue','إنشاء حساب سائق جديد')
 
-@section('route', route('busInfo'))
+@section('route', route('addDriver'))
 
 
 @if (session('success'))
@@ -22,7 +24,8 @@
 @endif
 
 @section('content')
-    <p>هنا عرض الحافلات</p>
+    <p>هنا عرض السائقين</p>
 @endsection
+
 
 @include('components.button')

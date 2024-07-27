@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\interfaces;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\BrowseTrips;
 use App\Http\Controllers\User\UserActions;
+use App\Models\Manager;
+use Illuminate\Support\Facades\Hash as FacadesHash;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return "welcome to user route";
@@ -14,7 +17,13 @@ Route::get('/', function () {
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/hi', [AuthController::class, 'hi'])->name('hi');
+
+
+
+Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
+Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
+
+
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
 
@@ -25,6 +34,28 @@ Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('booki
 
 
 
+/////////////// method to add manager  instead of insert in my sql this to test the project not main in out project ///////////////////
+Route::post('/manage_store',function (Request $request){
+    {
+        $validator = FacadesValidator::make($request->all(),[
+            'Fname' => 'required|string|max:255',
+            'Lname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:managers',
+            'password' => 'required|string|min:6',
+            'branch_id' => 'required|number',
+            'phone_number' => 'required|max:32',
+            'hire_date' => 'required|date',
+        ]);
 
-///////////// register manager account api for going on///////////////
-Route::post('/manage_store',[AuthController::class,'Manager_register'])->name('reg');
+        $request['password'] = FacadesHash::make($request['password']);
+        $user = Manager::create(['Fname'=>$request['Fname'],
+            'Lname' => $request['Lname'],
+            'email'=>$request['email'],
+            'password' => $request['password'],
+            'Branch_id' => $request['Branch_id'],
+            'phone_number'  => $request['phone_number'],
+            'hire_date' => $request['hire_date']
+        ]);
+        return "manager created";
+    }
+});

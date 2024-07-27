@@ -25,11 +25,10 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
-    //    if()
         if (Auth::guard('manager-web')->attempt($request->only('email', 'password'))) {
             return redirect()->intended( route('showMainLayout') );
         }
-        return back()->with('message','Invalid email or password');
+        return back()->withErrors(['error' => 'Invalid email or password'])->withInput();
     }
 
     public function logout()

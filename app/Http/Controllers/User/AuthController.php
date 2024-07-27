@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Manager;
-use Illuminate\Http\JsonResponse;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Support\Str;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class AuthController extends Controller
 {
@@ -43,10 +41,6 @@ class AuthController extends Controller
         return response()->json($response, 201, [$message]);
     }
 
-    public function hi(): string
-    {
-        return 'hi  ';
-    }
 
     public function login(Request $request)
     {
@@ -73,42 +67,5 @@ class AuthController extends Controller
             return response($response, 422);
 
         }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function Manager_register(Request $request){
-
-        $validator = FacadesValidator::make($request->all(),[
-            'Fname' => 'required|string|max:255',
-            'Lname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:managers',
-            'password' => 'required|string|min:6',
-            'branch_id' => 'required|number',
-            'phone_number' => 'required|max:32',
-            'hire_date' => 'required|date',
-        ]);
-
-        $request['password'] = FacadesHash::make($request['password']);
-        $user = Manager::create(['Fname'=>$request['Fname'],
-            'Lname' => $request['Lname'],
-            'email'=>$request['email'],
-            'password' => $request['password'],
-            'Branch_id' => $request['Branch_id'],
-            'phone_number'  => $request['phone_number'],
-            'hire_date' => $request['hire_date']
-        ]);
-
-        return "manager created";
     }
 }

@@ -26,17 +26,22 @@
                             <div class="card-body p-4 p-lg-5 text-black">
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align:center;font-weight: bolder">Sign into manager dashboard</h5>
-
+                                @if ($errors->has('error'))
+                                    <span class="text-danger " style="font-size: large ; font-weight: bolder ;" >{{ $errors->first('error') }}</span>
+                                @endif
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form2Example17" style="font-weight: bold">Email </label>
-                                        <input type="email" name="email" id="form2Example17" class="form-control form-control-lg" class="form-control @error('email') is-invalid @enderror" autofocus />
+                                        <input type="email" name="email" id="form2Example17" class="form-control form-control-lg" class="form-control ]" autofocus />
+
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form2Example27" style="font-weight: bold">Password</label>
-                                        <input type="password" name="password" id="form2Example27" class="form-control form-control-lg" class="form-control @error('password') is-invalid @enderror" />
+                                        <input type="password" name="password" id="form2Example27" class="form-control form-control-lg" class="form-control " />
+
+
                                     </div>
 
                                     <div class="pt-1 mb-4">

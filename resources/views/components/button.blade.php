@@ -1,4 +1,5 @@
-<a class="submit" href="@yield('route', '#')">@yield('linkValue', 'Default ')</a>
+
+<a class="submit"   href="@yield('route', '#')">@yield('linkValue', 'Default ')</a>
 
 <style>
     .submit{
@@ -9,7 +10,7 @@
     width: fit-content;
     position: absolute;
     top:110px;
-    right:80%;
+    right:85%;
     cursor: pointer;
     text-align:center;
     color: #010101;

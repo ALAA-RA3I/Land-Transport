@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Bus;
+namespace App\Http\Controllers\Manager;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\bus as RequestsBus;
 use App\Models\Branch;
 use App\Models\Bus as ModelsBus;
-use App\Http\Controllers\Controller;
 
 class Bus extends Controller
 {
@@ -14,8 +14,8 @@ class Bus extends Controller
     }
 
     public function busInformation(RequestsBus $request){
-        $request->validated();   
-        
+        $request->validated();
+
         if (!Branch::find(1)) {
             Branch::create([
                 'id' => 1,
@@ -31,7 +31,7 @@ class Bus extends Controller
         }else{
             $chairCount=45;
         }
-        ModelsBus::create([
+        \App\Models\Bus::create([
             'bus_name' => $request->input('bus_name'),
             'model' => $request->input('model'),
             'type' => $request->input('type'),
