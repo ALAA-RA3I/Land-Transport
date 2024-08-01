@@ -14,16 +14,16 @@ Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/users', [UserController::class, 'users']);
 });*/
 
+
+Route::get('/tes3t', function() {
+   
+   return 'hi';
+});
+
 Route::get('/test', function() {
     $user =   Auth::guard('manager-web')->user()->Branch_id;
    return $user;
 });
-
-
-
-
-
-
 
 Route::get('/login',[AuthController::class,'loginPage'])->name('loginPage');
 Route::post('/login',[AuthController::class,'login'])->name('login');

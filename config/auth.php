@@ -41,14 +41,15 @@ return [
         'provider' => 'managers',
     ],
 
-    'user-api' => [
+    'user' => [
         'driver' => 'passport',
         'provider' => 'users',
     ],
-        'driver-api' => [
-            'driver' => 'passport',
-            'provider' => 'drivers',
-        ],
+        
+    'driver' => [
+        'driver' => 'passport',
+        'provider' => 'drivers',
+    ],
 ],
 
     /*

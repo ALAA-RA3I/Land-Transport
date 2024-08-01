@@ -9,21 +9,25 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return "welcome to user route";
-});
 
+// Route::get('/hi', function () {
+//     return "welcome to user wwwwroute";
+// });
 
-
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-
-
+// Route::prefix('user')->group(function () {
+//     Route::post('register', [AuthController::class, 'register'])->name('register');
+//     Route::post('login', [AuthController::class, 'login'])->name('login');
+// });
+require __DIR__.'/user-auth.php';
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
 Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
 
-
+// Route::prefix('api')->group(function () {
+//     Route::get('/hi', function () {
+//         return 'hi';
+//     });
+// });
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
 
