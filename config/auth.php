@@ -81,6 +81,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Manager::class),
         ],
+        Laravel\Passport\PassportServiceProvider::class,
 
         // 'users' => [
         //     'driver' => 'database',

@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Manager\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Manager;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
 
-class AuthController extends Controller
+class ManagerAuthController extends Controller
 {
     public function __construct()
     {

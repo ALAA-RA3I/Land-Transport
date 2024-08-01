@@ -1,8 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\Auth\ManagerAuthController;
 use App\Http\Controllers\interfaces;
-use App\Http\Controllers\Manager\Auth\AuthController;
 use App\Http\Controllers\Manager\Bus;
 use App\Http\Controllers\Manager\Drivers;
 use App\Http\Controllers\Trips\Trip;
@@ -25,9 +25,9 @@ Route::get('/test', function() {
 
 
 
-Route::get('/login',[AuthController::class,'loginPage'])->name('loginPage');
-Route::post('/login',[AuthController::class,'login'])->name('login');
-Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+Route::get('/login',[ManagerAuthController::class,'loginPage'])->name('loginPage');
+Route::post('/login',[ManagerAuthController::class,'login'])->name('login');
+Route::get('/logout',[ManagerAuthController::class,'logout'])->name('logout');
 
 ////////////// access drivers by manager ////////////////
 Route::get('/drivers',[Drivers::class,'show_drivers'])->name('showDrivers');
