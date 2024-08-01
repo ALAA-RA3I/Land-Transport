@@ -9,20 +9,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return "welcome to user route";
-});
 
-
-
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
 Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
-
 
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');

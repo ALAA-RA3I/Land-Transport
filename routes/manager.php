@@ -14,11 +14,6 @@ Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/users', [UserController::class, 'users']);
 });*/
 
-Route::get('/test', function() {
-    $user =   Auth::guard('manager-web')->user()->Branch_id;
-   return $user;
-});
-
 
 
 
@@ -28,6 +23,8 @@ Route::get('/test', function() {
 Route::get('/login',[ManagerAuthController::class,'loginPage'])->name('loginPage');
 Route::post('/login',[ManagerAuthController::class,'login'])->name('login');
 Route::get('/logout',[ManagerAuthController::class,'logout'])->name('logout');
+
+
 
 ////////////// access drivers by manager ////////////////
 Route::get('/drivers',[Drivers::class,'show_drivers'])->name('showDrivers');

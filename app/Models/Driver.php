@@ -40,6 +40,8 @@ class Driver  extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable ;
 
     protected $table = 'driver';
+	protected $guard = 'driver';
+
 	public $incrementing = false;
 	public $timestamps = false;
 
