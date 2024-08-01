@@ -12,8 +12,8 @@
 
 @section('titleOfBox','قم بملئ معلومات السائق')
 
-@section('content')
-    <section class="intro" style="position: relative ;top: 10px ; height: 500px;
+
+    <section class="intro" style="position: absolute ;top: 180px; right: 380px; height: 500px ;width: 1400px;
      ">
             <div>
 
@@ -123,4 +123,4 @@
             </div>
         </div>
     </section>
-@endsection
+

@@ -128,9 +128,5 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-    'providers' => [
-        // Other Service Providers
-//
-//        App\Providers\AuthServiceProvider::class,
-    ],
+
 ];

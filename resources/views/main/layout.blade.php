@@ -35,7 +35,7 @@
                     <img class="main" src="{{asset('Images/لوغو زريق.png رمادي.png')}}" alt="">
                 @endif
                 @hasSection('content')
-{{--                <div class="content">--}}
+                <div class="content">
                     @yield('content','')
                 </div>
                 @endif

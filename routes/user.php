@@ -1,16 +1,23 @@
 <?php
 
+use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\BrowseTrips;
 use App\Http\Controllers\User\UserActions;
 use App\Models\Manager;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Http\Request;
 
 
+Route::middleware('auth:user')->group(function () {
+    Route::post('/logout', [UserAuthController::class, 'logout'])->name('UserLogout');
+});
 
+Route::post('register',[UserAuthController::class,'register'])->name('UserRegister');
+Route::post('login',[UserAuthController::class,'login'])->name('UserLogin');
 
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
@@ -18,6 +25,8 @@ Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->
 
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
+
+
 
 
 
