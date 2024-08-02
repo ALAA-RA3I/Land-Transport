@@ -25,34 +25,25 @@ class UserAuthController extends Controller
             'password' => 'required|string|min:6',
             'phone_number' => 'required|max:32',
             'address' => 'required|string|max:512',
-            'National_Number' => 'required|string|max:64',
+            'National_Number' => 'required|string|max:64', //required
             'birthday' => 'required|date',
         ]);
-
         if ($validator->fails()) {
-            return $this->apiResponse($validator->errors(),"Errors Message",422);
+            return response(['errors' => $validator->errors()->all()], 422);
         }
 
         $request['password'] = Hash::make($request['password']);
+        $request['remember_token'] = Str::random(10);
 
-        $user = User::create([
-            'Fname' => $request['Fname'] ,
-            'Mname' => $request['Mname'],
-            'Lname' => $request['Lname'] ,
-            'email' => $request['email'] ,
-            'password' =>  $request['password'],
-            'birthday' => $request['birthday'] ,
-            'phone_number' => $request['phone_number']  ,
-            'address' => $request['address'],
-            'National_Number' => $request['National_Number']
-        ]);
-        $token = $user->createToken('User Token', ['user'])->accessToken;
+        $user = User::create($request->toArray());
+        $token = $user->createToken('Password Grant Client')->accessToken;
 
 
-        return $this->apiResponse($token,"User register Successfully",201);
-
+        return $this->apiResponse([
+            'token' => $token,
+            'user' => $user
+        ], "User registered successfully", 201);    
     }
-
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -61,20 +52,25 @@ class UserAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->apiResponse($validator->errors(),"Errors Message",422);
+            return response(['errors' => $validator->errors()->all()], 422);
         }
 
-        if (!auth()->attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Unauthorized incorrect information'], 401);
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+
+                return $this->apiResponse([
+                    'token' => $token,
+                    'user' => $user
+                ], "User logined successfully", 201);  
+             return response(['token' => $token], 200);
+            } else {
+                return response(['message' => 'Password mismatch'], 422);
+            }
+        } else {
+            return response(['message' => 'User does not exist'], 422);
         }
-
-        $user = auth()->user();
-        $tokenResult = $user->createToken('User Token', ['user']);
-        $token = $tokenResult->token;
-        $token->save();
-
-        return $this->apiResponse($tokenResult->accessToken,"User Login Successfully",201);
-
     }
     public function logout(Request $request)
     {
