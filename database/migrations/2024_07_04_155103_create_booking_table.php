@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('booking', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('User_id');
-            $table->foreign('User_id')->references('id')->on('user');
+            $table->foreign('User_id')->references('id')->on('users');
             $table->integer('Manager_id')->nullable();
             $table->foreign('Manager_id')->references('id')->on('manager');
             $table->date('date_of_booking');

@@ -64,13 +64,10 @@
         @endforeach
         </select>
         <label for="from-to">اختر الوجهة</label>
-        <select 
-            name="From_To_id" 
-            id="from-to"
-        >
-        @foreach ($places as $place)
-            <option value="{{ $place->id }}">{{$place->destination}}</option>
-        @endforeach
+        <select name="From_To_id" id="from-to">
+            @foreach ($places as $id => $destination)
+                <option value="{{ $id }}">{{ $destination }}</option>
+            @endforeach
         </select>
         <label for="cost">أدخل تكلفة المقعد</label>
             <input 

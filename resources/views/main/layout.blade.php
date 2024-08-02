@@ -32,10 +32,10 @@
                 </div>
                 @endif
                 @if (Request::is('manager/dashboard'))
-                    <img class="main" src="{{asset('Images/لوغو زريق.png رمادي.png')}}" alt="">
+                    <img class="main" src="{{asset('Images/لوغو زريق.png كحلي.png')}}" alt="">
                 @endif
                 @hasSection('content')
-{{--                <div class="content">--}}
+                    <div class="content">
                     @yield('content','')
                 </div>
                 @endif

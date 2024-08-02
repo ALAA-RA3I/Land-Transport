@@ -6,16 +6,19 @@ use App\Http\Requests\trip as RequestsTrip;
 use App\Models\Bus;
 use App\Models\Driver;
 use App\Models\FromTo;
+use App\Models\Manager;
 use App\Models\Trip as ModelsTrip;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class Trip extends Controller
 {
     public function addExceptionTrip(){
+        $manager=Auth::guard('manager-web')->user();
+        $branchTitle = $manager->branch->office_address;
         $buses = Bus::all();
-        $places = FromTo::all();
+        $places = FromTo::where('source', $branchTitle)->pluck('destination','id');
         $drivers = Driver::all();
-        // dd(compact('buses','places','drivers'))
         return view('trips.addExceptionalTrip')
             ->with('buses',$buses)
             ->with('places',$places)
@@ -23,6 +26,7 @@ class Trip extends Controller
     }
 
     public function exceptionalTripInformation(RequestsTrip $request) {
+        $branchId=Auth::guard('manager-web')->user()->Branch_id;
         $bus = Bus::findOrFail($request->input('Bus_id'));
         $chair = $bus->chair_count;
         $currentTrip = ModelsTrip::where('date', $request->input('date'))
@@ -43,7 +47,7 @@ class Trip extends Controller
             'From_To_id' => $request->input('From_To_id'),
             'cost' => $request->input('cost'),
             'available_chair' => $chair,
-            'Branch_id' => 1,
+            'Branch_id' => $branchId,
             'trip_type' => 'exceptional'
         ]);
 
