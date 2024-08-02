@@ -84,6 +84,12 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
+//     'providers' => [
+
+//     Laravel\Passport\PassportServiceProvider::class,
+
+// ],
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -99,14 +105,14 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'previous_keys' => [
-        ...array_filter(
-            explode(',', env('APP_PREVIOUS_KEYS', ''))
-        ),
-    ],
+//    'previous_keys' => [
+//        ...array_filter(
+//            explode(',', env('APP_PREVIOUS_KEYS', ''))
+//        ),
+//    ],
 
     /*
-    |--------------------------------------------------------------------------
+    |---------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |

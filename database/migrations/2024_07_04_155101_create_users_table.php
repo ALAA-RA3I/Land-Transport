@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('birthday');
             $table->string('phone_number');
             $table->string('address');
-            $table->bigInteger('NationalNumber');
+            $table->bigInteger('National_Number');
             //$table->rememberToken();
             $table->timestamps();
         });

@@ -41,14 +41,15 @@ return [
         'provider' => 'managers',
     ],
 
-    'user-api' => [
+    'user' => [
         'driver' => 'passport',
         'provider' => 'users',
     ],
-        'driver-api' => [
-            'driver' => 'passport',
-            'provider' => 'drivers',
-        ],
+
+    'driver' => [
+        'driver' => 'passport',
+        'provider' => 'drivers',
+    ],
 ],
 
     /*
@@ -81,6 +82,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Manager::class),
         ],
+        Laravel\Passport\PassportServiceProvider::class,
 
         // 'users' => [
         //     'driver' => 'database',
