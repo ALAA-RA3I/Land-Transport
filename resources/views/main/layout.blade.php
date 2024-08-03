@@ -13,6 +13,7 @@
                 <ul class="choises">
                     <a href="{{ route ('showTripsSection') }}"><li>رحلات</li></a>
                     <a href="#"><li>رحلات مجدولة</li></a>
+                    <a href="{{route('showAvaliableTripsForBooking')}}"><li>اضافة حجز </li></a>
                     <a href="#"><li>الرحلات الحالية</li></a>
                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                     <a href="{{route('showDrivers')}}"><li>السائقين</li></a>
@@ -35,11 +36,7 @@
                     <img class="main" src="{{asset('Images/لوغو زريق.png كحلي.png')}}" alt="">
                 @endif
                 @hasSection('content')
-<<<<<<< HEAD
-                    <div class="content">
-=======
                 <div class="content">
->>>>>>> 0fdd74212b6d556196dcc367fddccfc7cf450feb
                     @yield('content','')
                 </div>
                 @endif

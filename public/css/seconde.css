@@ -70,3 +70,36 @@
         width: 70px;
         border-radius: 5px solid #f8c62d
     }
+    .alert {
+        padding: 20px;
+        background-color: #9daf4c; 
+        color: white;
+        margin-bottom: 15px;
+    }
+    
+    .alert.success {
+        background-color: #4CAF50;
+        margin-left: 4px;
+
+    }
+    
+    .alert.error {
+        background-color: #f44336;
+    }
+    
+    /* Close button */
+    .alert .closebtn {
+        margin-left: 4px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .alert .closebtn:hover {
+        color: black;
+    }
+    
