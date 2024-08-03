@@ -15,14 +15,15 @@ class AddBooking extends Controller
         return view('showAvaliableTripsForBooking');
     }
 
-    public function addManualBooking()
+    public function addManualBooking($tripID)
     {
-        return view('addManualBooking');
+        return view('addManualBooking', compact('tripID'));
     }
 
-    public function addBooking(Request $request)
+    public function addBooking(Request $request, $tripID)
     {
-        // Retrieve the authenticated manager
+log($tripID);
+      // Retrieve the authenticated manager
         $manager = Auth::guard('manager-web')->user();
         if (!$manager) {
             return redirect()->route('loginPage')->withErrors('Unauthorized');
@@ -42,18 +43,20 @@ class AddBooking extends Controller
         $booking = Booking::create([
             'Manager_id' => $manager->id,
             'date_of_booking' => Carbon::now()->format('Y-m-d'),
-            'Trip_id' => 1, // This should be dynamic based on your logic
+            'Trip_id' => $tripID, 
             'booking_type' => 'Manual',
             'Branch_id' => $manager->Branch_id,
             'charge_id' => 1, // This should also be dynamic or based on logic
-            'first_name' => $request->input('firstName'),
-            'middle_name' => $request->input('middleName'),
-            'last_name' => $request->input('lastName'),
-            'national_id' => $request->input('nationalId'),
-            'phone_number' => $request->input('phoneNumber'),
-            'seat_number' => $request->input('seatNumber'),
+            // 'first_name' => $request->input('firstName'),
+            // 'middle_name' => $request->input('middleName'),
+            // 'last_name' => $request->input('lastName'),
+            // 'national_id' => $request->input('nationalId'),
+            // 'phone_number' => $request->input('phoneNumber'),
+            // 'seat_number' => $request->input('seatNumber'),
         ]);
 
-        return redirect()->route('addManualBooking')->with('success', 'تم إضافة الحجز بنجاح');
-    }
+        log($tripID); // This line will log the received trip ID for verification
+
+        return redirect()->route('addManualBooking', ['tripID' => $tripID])->with('success', 'Booking added successfully');
+        }
 }

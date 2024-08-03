@@ -29,7 +29,7 @@
     </div>
 @endif
 
-<form action="{{ route('addBooking') }}" method="POST">
+<form action="{{ route('addBooking', $tripID) }}" method="POST">
     @csrf
     <label for="firstName">الاسم الأول</label>
     <input type="text" name="firstName"  id="firstName" value="{{ old('firstName') }}">

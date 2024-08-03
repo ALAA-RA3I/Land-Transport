@@ -24,8 +24,8 @@ Route::post('/storeDriver',[Drivers::class,'storeDriverInfo'])->name('storeDrive
 
 
 Route::get('/showAvaliableTripsForBooking', [AddBooking::class, 'showAvaliableTripsForBooking'])->name('showAvaliableTripsForBooking');
-Route::get('/addManualBooking', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
-Route::post('/addBooking', [AddBooking::class, 'addBooking'])->name('addBooking');
+Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
+Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
 
 
 Route::get('/dashboard', [interfaces::class, 'shomMainLayout'])->name('showMainLayout');

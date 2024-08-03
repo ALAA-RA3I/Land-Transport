@@ -11,7 +11,7 @@
 
 
 @if ($errors->any())
-<script>
+<script>    
     let errorMessages = '';
     @foreach ($errors->all() as $error)
         errorMessages += '{{ $error }}\n';
@@ -23,7 +23,9 @@
 
 @section('content')
     <div class="content">
-        <a href="{{route('addManualBooking')}}"><li>حجز يدوي</li></a>
+
+        {{-- replace 5 with the real trip id  --}}
+        <a href="{{route('addManualBooking',13)}}"><li>حجز يدوي</li></a>  
 
     </div>
 @endsection
