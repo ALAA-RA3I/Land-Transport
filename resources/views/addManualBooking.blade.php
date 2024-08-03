@@ -17,6 +17,12 @@
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     </div>
 @endif
+@if (session('fail'))
+    <div class="alert alert-erroe">
+        {{ session('fail') }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    </div>
+@endif
 
 @if ($errors->any())
     <div class="alert alert-error">
@@ -46,10 +52,14 @@
     <label for="phoneNumber">رقم الجوال</label>
     <input type="number" name="phoneNumber"  id="phoneNumber" value="{{ old('phoneNumber') }}">
 
+    
+    <label for="phoneNumber"> العمر</label>
+    <input type="number" name="age"  id="age" value="{{ old('age') }}">
+
     <label for="seatNumber">رقم المقعد</label>
     <select name="seatNumber" id="seatNumber">
         @for ($i = 1; $i <= 10; $i++) 
-            <option value="{{ $i }}" {{ old('seatNumber') == $i ? 'selected' : '' }}>مقعد {{ $i }}</option>
+            <option value="{{ $i }}" {{ old('seatNumber') == $i ? 'selected' : '' }}> {{ $i }}</option>
         @endfor
     </select>
 
