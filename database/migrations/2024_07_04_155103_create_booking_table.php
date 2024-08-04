@@ -15,17 +15,27 @@ return new class extends Migration
 
         Schema::create('booking', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('User_id');
-            $table->foreign('User_id')->references('id')->on('users');
+            $table->integer('User_id')->nullable();
             $table->integer('Manager_id')->nullable();
-            $table->foreign('Manager_id')->references('id')->on('manager');
             $table->date('date_of_booking');
             $table->integer('Trip_id');
-            $table->foreign('Trip_id')->references('id')->on('trips');
             $table->enum('booking_type', ["Electronic","Manual"]);
             $table->integer('Branch_id');
-            $table->foreign('Branch_id')->references('id')->on('branch');
             $table->string('charge_id');
+            
+            // $table->string('Fname');
+            // $table->string('Mname')->nullable();
+            // $table->string('Lname');
+            // $table->string('phone_number');
+            // $table->bigInteger('National_Number');
+
+            $table->foreign('User_id')->references('id')->on('users');
+            $table->foreign('Manager_id')->references('id')->on('manager');
+            $table->foreign('Trip_id')->references('id')->on('trips');
+            $table->foreign('Branch_id')->references('id')->on('branch');
+
+
+
         });
 
         Schema::enableForeignKeyConstraints();

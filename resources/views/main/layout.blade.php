@@ -13,6 +13,7 @@
                 <ul class="choises">
                     <a href="{{ route ('showTripsSection') }}"><li>رحلات</li></a>
                     <a href="#"><li>رحلات مجدولة</li></a>
+                    <a href="{{route('showAvaliableTripsForBooking')}}"><li>اضافة حجز </li></a>
                     <a href="#"><li>الرحلات الحالية</li></a>
                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
                     <a href="{{route('showDrivers')}}"><li>السائقين</li></a>

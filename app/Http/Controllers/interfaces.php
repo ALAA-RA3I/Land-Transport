@@ -12,7 +12,12 @@ class interfaces extends Controller
     public function showBusSection() {
         return view('buses');
     }
-
+    public function showAvaliableTripsForBooking() {
+        return view('showAvaliableTripsForBooking');
+    }
+    public function addManualBooking() {
+        return view('addManualBooking');
+    }
     public function showTripsSection(){
         return view ('trips.trips');
     }

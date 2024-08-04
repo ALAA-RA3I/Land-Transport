@@ -19,18 +19,21 @@ return new class extends Migration
             $table->date('date');
             $table->time('start_trip');
             $table->time('end_trip');
-            $table->integer('Driver_id');
-            $table->foreign('Driver_id')->references('id')->on('driver');
-            $table->integer('Bus_id');
-            $table->foreign('Bus_id')->references('id')->on('bus');
-            $table->integer('From_To_id');
-            $table->foreign('From_To_id')->references('id')->on('from_to');
-            $table->integer('Branch_id');
-            $table->foreign('Branch_id')->references('id')->on('branch');
-            $table->bigInteger('cost');
             $table->enum('status', ["Done","Progress","Wait"])->default("Wait");
             $table->integer('available_chair');
             $table->enum('trip_type', ["scheduled","exceptional"]);
+            $table->bigInteger('cost');
+
+            $table->integer('Driver_id');
+            $table->integer('Bus_id');
+            $table->integer('From_To_id');
+            $table->integer('Branch_id');
+
+            $table->foreign('Driver_id')->references('id')->on('driver');
+            $table->foreign('Bus_id')->references('id')->on('bus');
+            $table->foreign('From_To_id')->references('id')->on('from_to');
+            $table->foreign('Branch_id')->references('id')->on('branch');
+           
         });
 
         Schema::enableForeignKeyConstraints();
