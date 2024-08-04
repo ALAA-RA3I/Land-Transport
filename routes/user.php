@@ -26,6 +26,8 @@ Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
 
+Route::post('/calcBookingCost/{id}',[UserActions::class,'calculateBookingCost'])->name('calculateBookingCost');
+
 /////////////// method to add manager  instead of insert in my sql this to test the project not main in out project ///////////////////
 Route::post('/manage_store',function (Request $request){
     {

@@ -40,6 +40,7 @@ class UserActions extends Controller
         $bus = $tripInfo->bus; 
         $maxChairs = $bus->chair_count;
         $busId= $bus->bus_number;
+        $tripDate = $tripInfo->date;
 
         $request->validate([
             'passengers.*.first_name' => 'required |string',
@@ -47,7 +48,7 @@ class UserActions extends Controller
             'passengers.*.last_name' => 'required |string',
             'passengers.*.age' => 'required | integer | min : 1 | max:99',
             'passengers.*.chair_num' => 'required | integer | min : 1 | max:' . $maxChairs,
-            // 'stripeToken' => 'required|string',
+            'stripeToken' => 'required|string',
         ]);
 
         $passengers = $request->input('passengers');
@@ -68,9 +69,9 @@ class UserActions extends Controller
             $charge=Charge::create([
                 'amount' => $totalCost *100,
                 'currency' =>'usd',
-                // 'source'=>$request->input('stripeToken'),
+                'source'=>$request->input('stripeToken'),
                 //when test, use this one :
-                'source'=>'tok_visa',
+                // 'source'=>'tok_visa',
                 'description' => 'دفع ثمن التذكرة',
             ]);
     
@@ -86,9 +87,9 @@ class UserActions extends Controller
             $bookingInfo = Booking::where('id', $booking)
             ->with(['trip' => function ($query) {
                 $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id')
-                        ->with(['from_to' => function ($subQuery) {
-                        $subQuery->select('id', 'source', 'destination');
-                        }]);
+                    ->with(['from_to' => function ($subQuery) {
+                    $subQuery->select('id', 'source', 'destination');
+                    }]);
             }])
             ->first();
             foreach($request->input('passengers') as $passengerData) {
@@ -98,7 +99,7 @@ class UserActions extends Controller
                 }
     
                 $ticket = Ticket::create([
-                    'tickets_num' => $this->generateTicketNumber($tripId,$passengerData['chair_num'],$busId),
+                    'tickets_num' => $this->generateTicketNumber($tripId,$passengerData['chair_num'],$busId ,$tripDate),
                     'first_name' => $passengerData['first_name'],
                     'mid_name' => $passengerData['mid_name'],
                     'last_name' => $passengerData['last_name'],
@@ -120,8 +121,22 @@ class UserActions extends Controller
             return $this->apiResponse('','حدث خطأ','500');
         }
     }
-    private function generateTicketNumber($tripId, $chair_num, $bus) {
-        $date = Carbon::now()->format('Y-m-d');
-        return  $date . "-" . $tripId . "-" . $bus . "-" . $chair_num;
+
+    private function generateTicketNumber($tripId, $chair_num, $bus , $tripDate) {
+        return  $tripDate . "-" . $tripId . "-" . $bus . "-" . $chair_num;
+    }
+
+    public function calculateBookingCost($tripId , Request $request) {
+        $tripInfo = Trip::where('id' , $tripId)->first();
+        $bus = $tripInfo->bus;
+        $maxChairs = $bus->chair_count;
+
+        $request->validate([
+            'passengers.*.chair_num' => 'required|integer|min:1|max:' . $maxChairs,
+        ]);
+
+        $passengers = $request->input('passengers');
+        $cost = count($passengers) * $tripInfo->cost;
+        return $this->apiResponse($cost,'التكلفة الاجمالية للرحلة',200);
     }
 }
