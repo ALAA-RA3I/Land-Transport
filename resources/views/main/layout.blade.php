@@ -35,15 +35,13 @@
                     <img class="main" src="{{asset('Images/لوغو زريق.png كحلي.png')}}" alt="">
                 @endif
                 @hasSection('content')
-<<<<<<< HEAD
                     <div class="content">
-=======
                 <div class="content">
->>>>>>> 0fdd74212b6d556196dcc367fddccfc7cf450feb
                     @yield('content','')
                 </div>
                 @endif
-            </div>
+                    </div>
         </div>
+</div>
 </body>
 </html>

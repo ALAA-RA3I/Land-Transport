@@ -21,7 +21,7 @@ class UserActions extends Controller
 {
     use ApiResponse;
     public function bookingTrip($tripId, Request $request ) {
-        $user = Auth::guard('user-api')->user()->id; 
+        $user = Auth::guard('user')->user()->id; 
         // return $user;
         try{
             $tripInfo=Trip::findOrFail($tripId);
@@ -30,7 +30,7 @@ class UserActions extends Controller
             return $this->apiResponse("","Not-Found",404);
         }
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(env('STRIPE_SECRET_TEST'));
 
         if($tripInfo->status === "Done"){
             return $this->apiResponse('','الرحلة قد انتهت،لا يمكنك الحجز فيها',409);
@@ -76,21 +76,28 @@ class UserActions extends Controller
     
             $booking=Booking::insertGetId([
                 'User_id' => $user,
-                'Manager_id' => 1,
+                'Manager_id' => null,
                 'date_of_booking' => $today,
                 'Trip_id'=> $tripId,
                 'booking_type' => 'Electronic',
                 'Branch_id'=>$tripInfo->Branch_id,
-                'charge_id' => $tripInfo->cost,
+                'charge_id' => $charge->id,
             ]);
-    
+            $bookingInfo = Booking::where('id', $booking)
+            ->with(['trip' => function ($query) {
+                $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id')
+                        ->with(['from_to' => function ($subQuery) {
+                        $subQuery->select('id', 'source', 'destination');
+                        }]);
+            }])
+            ->first();
             foreach($request->input('passengers') as $passengerData) {
-                if($availableChairs == 0) {
+                if($availableChairs == 0 || count($passengers) > $availableChairs) {
                     DB::rollBack();
                     return $this->apiResponse("","لا يوجد المزيد من المقاعد المتاحة",409);
                 }
     
-                Ticket::create([
+                $ticket = Ticket::create([
                     'tickets_num' => $this->generateTicketNumber($tripId,$passengerData['chair_num'],$busId),
                     'first_name' => $passengerData['first_name'],
                     'mid_name' => $passengerData['mid_name'],
@@ -106,7 +113,7 @@ class UserActions extends Controller
             $tripInfo->available_chair = $availableChairs;
             $tripInfo->save();
             DB::commit();
-            return $this->apiResponse('','تمت عملية الحجز بنجاح',200);
+            return $this->apiResponse($bookingInfo,'تمت عملية الحجز بنجاح',200);
         }catch(Exception $e){
             DB::rollBack();
             Log::error("Error occurred: " . $e->getMessage());
@@ -115,6 +122,6 @@ class UserActions extends Controller
     }
     private function generateTicketNumber($tripId, $chair_num, $bus) {
         $date = Carbon::now()->format('Y-m-d');
-        return  $date . $tripId . $bus . $chair_num;
+        return  $date . "-" . $tripId . "-" . $bus . "-" . $chair_num;
     }
 }

@@ -6,14 +6,13 @@ use App\Http\Requests\trip as RequestsTrip;
 use App\Models\Bus;
 use App\Models\Driver;
 use App\Models\FromTo;
-use App\Models\Manager;
 use App\Models\Trip as ModelsTrip;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class Trip extends Controller
 {
-    public function addExceptionTrip(){
+    public function addExceptionTrip() { 
         $manager=Auth::guard('manager-web')->user();
         $branchTitle = $manager->branch->office_address;
         $buses = Bus::all();
