@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('presence_travellet'); 
             $table->integer('age');
             $table->integer('Booking_id');
-            $table->foreign('Booking_id')->references('id')->on('booking');
+            $table->foreign('Booking_id')->references('id')->on('booking')->cascadeOnDelete();
         });
 
         Schema::enableForeignKeyConstraints();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\BrowseTrips;
+use App\Http\Controllers\User\controlBooking;
 use App\Http\Controllers\User\UserActions;
 use App\Models\Manager;
 use Illuminate\Support\Facades\Auth;
@@ -25,8 +26,10 @@ Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->
 
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
-
 Route::post('/calcBookingCost/{id}',[UserActions::class,'calculateBookingCost'])->name('calculateBookingCost');
+
+Route::get('/showMyBookings/{id}',[controlBooking::class,'showAllBooking'])->name('showAllBooking');
+Route::get('/cancelMyBookings/{id}',[controlBooking::class,'cancelBooking'])->name('cancelBooking');
 
 /////////////// method to add manager  instead of insert in my sql this to test the project not main in out project ///////////////////
 Route::post('/manage_store',function (Request $request){

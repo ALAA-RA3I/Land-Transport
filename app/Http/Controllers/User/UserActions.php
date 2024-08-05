@@ -30,7 +30,7 @@ class UserActions extends Controller
             return $this->apiResponse("","Not-Found",404);
         }
 
-        Stripe::setApiKey(env('STRIPE_SECRET_TEST'));
+        Stripe::setApiKey(config('stripe.test'));
 
         if($tripInfo->status === "Done"){
             return $this->apiResponse('','الرحلة قد انتهت،لا يمكنك الحجز فيها',409);
@@ -68,7 +68,7 @@ class UserActions extends Controller
             //start payment
             $charge=Charge::create([
                 'amount' => $totalCost *100,
-                'currency' =>'usd',
+                'currency' =>'eur',
                 'source'=>$request->input('stripeToken'),
                 //when test, use this one :
                 // 'source'=>'tok_visa',
