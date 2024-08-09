@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Log;
 class controlBooking extends Controller
 {
     use ApiResponse;
-    public function showAllBooking($userId){
+    public function showAllBooking(){
+        $userId = Auth::guard('user')->user()->id;
         $bookingInfo = Booking::where('User_id', $userId)
         ->with(['trip' => function ($query) {
             $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id')
@@ -27,7 +28,7 @@ class controlBooking extends Controller
     }
 
     public function cancelBooking($bookingId){
-        $stripe = new \Stripe\StripeClient(config('stripe.test'));
+        Stripe::setApiKey(config('services.stripe.test'));
         $userId = Auth::guard('user')->user()->id;
         $bookingId = Booking::where([
             ['id', $bookingId],
@@ -45,10 +46,10 @@ class controlBooking extends Controller
             $cost=$bookingId->trip->cost;
             $informationOfPayed = Ticket ::where('Booking_id', $bookingId->id)->count();
             try{
-            $stripe->refunds->create([
+            $charge = \Stripe\Charge::retrieve($bookingId->charge_id);
+            $refund = \Stripe\Refund::create([
                 'charge' => $bookingId->charge_id,
-                'amount' => $informationOfPayed * $cost *100,
-                'description' => 'إعادة ثمن التذكرة'
+                'amount' => $charge->amount,
             ]);
             $bookingId->delete();
             }catch (\Stripe\Exception\ApiErrorException $e) {

@@ -28,7 +28,7 @@ Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
 Route::post('/calcBookingCost/{id}',[UserActions::class,'calculateBookingCost'])->name('calculateBookingCost');
 
-Route::get('/showMyBookings/{id}',[controlBooking::class,'showAllBooking'])->name('showAllBooking');
+Route::get('/showMyBookings',[controlBooking::class,'showAllBooking'])->name('showAllBooking');
 Route::get('/cancelMyBookings/{id}',[controlBooking::class,'cancelBooking'])->name('cancelBooking');
 
 /////////////// method to add manager  instead of insert in my sql this to test the project not main in out project ///////////////////

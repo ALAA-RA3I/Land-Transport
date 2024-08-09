@@ -31,7 +31,7 @@ class UserActions extends Controller
             return $this->apiResponse("","Not-Found",404);
         }
 
-        Stripe::setApiKey(config('stripe.test'));
+        Stripe::setApiKey(config('services.stripe.test'));
 
         if($tripInfo->status === "Done"){
             return $this->apiResponse('','الرحلة قد انتهت،لا يمكنك الحجز فيها',409);
