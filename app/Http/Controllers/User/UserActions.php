@@ -6,6 +6,7 @@ use App\Models\Trip;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Ticket;
+use App\Models\CompanyCoupon;
 use App\Trait\ApiResponse;
 use Carbon\Carbon;
 use Exception;
@@ -36,11 +37,16 @@ class UserActions extends Controller
             return $this->apiResponse('','الرحلة قد انتهت،لا يمكنك الحجز فيها',409);
         }
         $today = Carbon::now()->format('Y-m-d');
+        $passengers = $request->input('passengers');
         
         $bus = $tripInfo->bus; 
         $maxChairs = $bus->chair_count;
         $busId= $bus->bus_number;
-        $tripDate = $tripInfo->date;
+        $tripDate = $tripInfo->date;     
+        $freeChairs = 0; 
+        $discount =0 ;
+        $totalPassengers = count($passengers);
+        $coupon = CompanyCoupon::get();   
 
         $request->validate([
             'passengers.*.first_name' => 'required |string',
@@ -51,7 +57,6 @@ class UserActions extends Controller
             'stripeToken' => 'required|string',
         ]);
 
-        $passengers = $request->input('passengers');
         $availableChairs = $tripInfo->available_chair;
         DB::beginTransaction();
         try{
@@ -63,11 +68,25 @@ class UserActions extends Controller
                 DB::rollBack();
                 return $this->apiResponse('','احد المقاعد او جميعها محجوزة بالفعل','409');
             }
-            $totalCost = $tripInfo->cost * count($passengers);
+            
+            foreach ($coupon as $coupons) {
+                if ($totalPassengers >= $coupons->num_chair) {
+                    $freeChairs = $coupons->free_chair;
+                } else {
+                    break; 
+                } 
+            }
+    
+            if($freeChairs != 0) {
+                $discount = $freeChairs * $tripInfo->cost;
+                $cost = count($passengers) * $tripInfo->cost - $discount;
+            } else{
+                $cost = count($passengers) * $tripInfo->cost;
+            }
 
             //start payment
             $charge=Charge::create([
-                'amount' => $totalCost *100,
+                'amount' => $cost *100,
                 'currency' =>'eur',
                 'source'=>$request->input('stripeToken'),
                 //when test, use this one :
@@ -130,13 +149,30 @@ class UserActions extends Controller
         $tripInfo = Trip::where('id' , $tripId)->first();
         $bus = $tripInfo->bus;
         $maxChairs = $bus->chair_count;
-
+        $passengers = $request->input('passengers');
+        $freeChairs = 0; 
+        $discount =0 ;
+        $totalPassengers = count($passengers);
+        $coupon = CompanyCoupon::get();
+        
         $request->validate([
             'passengers.*.chair_num' => 'required|integer|min:1|max:' . $maxChairs,
         ]);
 
-        $passengers = $request->input('passengers');
-        $cost = count($passengers) * $tripInfo->cost;
+        foreach ($coupon as $coupons) {
+            if ($totalPassengers >= $coupons->num_chair) {
+                $freeChairs = $coupons->free_chair;
+            } else {
+                break; 
+            } 
+        }
+
+        if($freeChairs != 0) {
+            $discount = $freeChairs * $tripInfo->cost;
+            $cost = count($passengers) * $tripInfo->cost - $discount;
+        } else{
+            $cost = count($passengers) * $tripInfo->cost;
+        }
         return $this->apiResponse($cost,'التكلفة الاجمالية للرحلة',200);
     }
 }
