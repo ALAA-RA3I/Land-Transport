@@ -173,7 +173,7 @@ class UserActions extends Controller
             return $this->apiResponse($cost,'  لقد حصلت على خصم، التكلفة الإجمالية ',200);
         } else{
             $cost = count($passengers) * $tripInfo->cost;
+            return $this->apiResponse($cost,'التكلفة الاجمالية للرحلة',200);
         }
-        return $this->apiResponse($cost,'التكلفة الاجمالية للرحلة',200);
     }
 }
