@@ -170,6 +170,7 @@ class UserActions extends Controller
         if($freeChairs != 0) {
             $discount = $freeChairs * $tripInfo->cost;
             $cost = count($passengers) * $tripInfo->cost - $discount;
+            return $this->apiResponse($cost,'  لقد حصلت على خصم، التكلفة الإجمالية ',200);
         } else{
             $cost = count($passengers) * $tripInfo->cost;
         }
