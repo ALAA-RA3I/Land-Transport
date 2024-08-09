@@ -42,7 +42,7 @@ class UserAuthController extends Controller
         return $this->apiResponse([
             'token' => $token,
             'user' => $user
-        ], "User registered successfully", 201);    
+        ], "User registered successfully", 201);
     }
     public function login(Request $request)
     {
@@ -63,8 +63,7 @@ class UserAuthController extends Controller
                 return $this->apiResponse([
                     'token' => $token,
                     'user' => $user
-                ], "User logined successfully", 201);  
-             return response(['token' => $token], 200);
+                ], "User logined successfully", 201);
             } else {
                 return response(['message' => 'Password mismatch'], 422);
             }

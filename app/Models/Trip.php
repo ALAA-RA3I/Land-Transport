@@ -109,6 +109,18 @@ class Trip extends Model
             ->select('trips.id', 'date', 'start_trip', 'end_trip', 'From_To_id', 'Bus_id')
             ->with('from_to:id,source,destination', 'bus:id,type');
     }
+    public function scopeSpecificDatePlace($query, $date,$from_to)
+    {
+        return $query->whereDate('date', $date)->where('From_To_id','=',$from_to)->where('available_chair', '>', '0')
+            ->select('trips.id', 'date', 'start_trip', 'end_trip', 'From_To_id', 'Bus_id')
+            ->with('from_to:id,source,destination', 'bus:id,type');
+    }
+    public function scopeSpecificPlace($query,$from_to)
+    {
+        return $query->where('From_To_id','=',$from_to)->where('available_chair', '>', '0')
+            ->select('trips.id', 'date', 'start_trip', 'end_trip', 'From_To_id', 'Bus_id')
+            ->with('from_to:id,source,destination', 'bus:id,type');
+    }
 
     public function scopeMoreDetails($query, $id)
     {

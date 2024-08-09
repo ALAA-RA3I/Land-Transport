@@ -23,6 +23,7 @@ Route::post('login',[UserAuthController::class,'login'])->name('UserLogin');
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
 Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
+Route::post('/searchAboutTrip',[BrowseTrips::class,'searchAboutTrip'])->name('searchAboutTripByDateOrFrTO');
 
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
