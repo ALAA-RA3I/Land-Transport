@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\FromTo;
+use App\Models\Ticket;
 use App\Models\Trip;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -26,7 +27,14 @@ class BrowseTrips extends Controller
     public function showMoreTripDetails($id)
     {
         $details = Trip::MoreDetails($id)->get();
-        return $this->apiResponse($details, " Rest Trip Details", 200);
+        $unavailable_chair = Ticket::whereHas('booking', function ($query) use ($id) {
+            $query->where('Trip_id', $id);
+        })->pluck('chair_num')->toArray();
+        $moreDetails = [
+            'tripDetails' => $details,
+            'unavailable_chair' => $unavailable_chair
+        ];
+        return $this->apiResponse($moreDetails, " Rest Trip Details", 200);
     }
 
     public function searchAboutTrip(Request $request)
