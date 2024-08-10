@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\UserAuthController;
-use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\AddFavouriteTime;
 use App\Http\Controllers\User\BrowseTrips;
 use App\Http\Controllers\User\controlBooking;
 use App\Http\Controllers\User\UserActions;
@@ -25,6 +25,7 @@ Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTrip
 Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
 Route::post('/searchAboutTrip',[BrowseTrips::class,'searchAboutTrip'])->name('searchAboutTripByDateOrFrTO');
 
+Route::post('/addNotify',[AddFavouriteTime::class,'addNotify'])->name('addNotify');
 
 Route::post('/bookingTrip/{id}',[UserActions::class,'bookingTrip'])->name('bookingTrip');
 Route::post('/calcBookingCost/{id}',[UserActions::class,'calculateBookingCost'])->name('calculateBookingCost');

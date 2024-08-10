@@ -22,13 +22,6 @@ return new class extends Migration
             $table->enum('booking_type', ["Electronic","Manual"]);
             $table->integer('Branch_id');
             $table->string('charge_id');
-            
-            // $table->string('Fname');
-            // $table->string('Mname')->nullable();
-            // $table->string('Lname');
-            // $table->string('phone_number');
-            // $table->bigInteger('National_Number');
-
             $table->foreign('User_id')->references('id')->on('users');
             $table->foreign('Manager_id')->references('id')->on('manager');
             $table->foreign('Trip_id')->references('id')->on('trips');

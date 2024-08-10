@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('favorite_times', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('User_id');
-            $table->foreign('User_id')->references('id')->on('user');
+            $table->foreign('User_id')->references('id')->on('users');
             $table->date('fav_date');
         });
 
