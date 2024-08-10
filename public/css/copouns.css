@@ -1,0 +1,24 @@
+/* copouns.css */
+
+/* Import Bootstrap */
+@import '~bootstrap/scss/bootstrap';
+
+/* Custom Styles */
+.table-dark {
+    color: #000; /* Text color should contrast with yellow */
+    background-color:#010101 /* Slightly darker yellow for the header */
+}
+
+.thead-dark th {
+    background-color:#010101; /* Slightly darker yellow for the header */
+    border-color:#010101 /* Slightly darker yellow for the header */
+
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color:#010101 /* Slightly darker yellow for the header */
+}
+.container{
+    margin-top: 10px;
+}
+    

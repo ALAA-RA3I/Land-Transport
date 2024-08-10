@@ -3,6 +3,8 @@
 
 use App\Http\Controllers\Auth\ManagerAuthController;
 use App\Http\Controllers\Manager\AddBooking;
+use App\Http\Controllers\Manager\Copouns;
+
 use App\Http\Controllers\interfaces;
 use App\Http\Controllers\Manager\Bus;
 use App\Http\Controllers\Manager\Drivers;
@@ -24,6 +26,13 @@ Route::post('/storeDriver',[Drivers::class,'storeDriverInfo'])->name('storeDrive
 
 
 Route::get('/showAvaliableTripsForBooking', [AddBooking::class, 'showAvaliableTripsForBooking'])->name('showAvaliableTripsForBooking');
+Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
+Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
+
+Route::get('/showCopouns', [Copouns::class, 'showCopouns'])->name('showCopouns');
+Route::delete('/coupons/{id}', [Copouns::class, 'destroy'])->name('coupons.destroy');
+
+
 Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
 Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
 
