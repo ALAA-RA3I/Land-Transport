@@ -31,6 +31,8 @@ Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('ad
 
 Route::get('/showCopouns', [Copouns::class, 'showCopouns'])->name('showCopouns');
 Route::delete('/coupons/{id}', [Copouns::class, 'destroy'])->name('coupons.destroy');
+Route::get('/couponsForCreate', [Copouns::class, 'couponsForCreate'])->name('couponsForCreate');
+Route::post('/coupons_create', [Copouns::class, 'create'])->name('coupons.create');
 
 
 Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');

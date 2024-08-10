@@ -21,4 +21,7 @@
 .container{
     margin-top: 10px;
 }
-    
+.bi.bi-plus-circle{
+    background-color:#010101 /* Slightly darker yellow for the header */
+
+}

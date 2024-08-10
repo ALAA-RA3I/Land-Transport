@@ -15,7 +15,7 @@
     @section('title', 'كوبونات')
     @section('logoutORback', route('showMainLayout'))
     @section('buttonText', 'عودة للقائمة الرئيسية')
-    @section('titleOfBox', 'الكوبونات الحالية')
+    @section('titleOfBox', 'الكوبونات ')
 
     @if ($errors->any())
         <script>        
@@ -35,6 +35,15 @@
 
     @section('content')
     <div class="container mt-4">
+        <!-- زر إضافة كوبون -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">الكوبونات الحالية</h3>
+            <a href="{{ route('couponsForCreate') }}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> إضافة كوبون
+            </a>
+        </div>
+
+        <!-- جدول الكوبونات -->
         <table class="table table-striped table-dark">
             <thead class="thead-dark">
                 <tr>
@@ -42,20 +51,20 @@
                     <th scope="col">اسم الكوبون</th>
                     <th scope="col">عدد الكراسي</th>
                     <th scope="col">عدد الكراسي المجانية</th>
-                    <th scope="col">الإجراء</th> <!-- Action column -->
+                    <th scope="col"></th> <!-- Action column -->
                 </tr>
             </thead>
             <tbody>
                 @foreach($coupons as $coupon)
                 <tr>
-                    <th scope="row">{{ $coupon['id'] }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th> <!-- استخدام رقم التكرار -->
                     <td>{{ $coupon['name'] }}</td>
                     <td>{{ $coupon['num_chair'] }}</td>
                     <td>{{ $coupon['free_chair'] }}</td>
                     <td>
                         <!-- Trigger the modal -->
                         <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-couponid="{{ $coupon['id'] }}">
-                            Delete
+                            حذف     
                         </button>
                     </td>
                 </tr>

@@ -31,10 +31,12 @@
                     <a href="{{route('showCopouns')}}"><li>كوبونات</li></a>
                     <a href="#"><li>إحصائيات</li></a>
                 </ul>
+
                 @hasSection('title')
                 <div class="title">
                     <p>@yield('titleOfBox','قم باختيار احد الروابط')</p>
                 </div>
+             
                 @endif
                 @if (Request::is('manager/dashboard'))
                     <img class="main" src="{{asset('Images/لوغو زريق.png كحلي.png')}}" alt="">
@@ -44,6 +46,7 @@
                 <div class="content">
                     @yield('content','')
                 </div>
+              
                 @endif
                     </div>
         </div>

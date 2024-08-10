@@ -34,7 +34,8 @@ class CompanyCoupon extends Model
 
 	protected $fillable = [
 		'num_chair',
-		'free_chair'
+		'free_chair',
+		'name'
 	];
 
 	public function user_coupons()

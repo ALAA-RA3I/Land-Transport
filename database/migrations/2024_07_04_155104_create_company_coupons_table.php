@@ -15,6 +15,7 @@ return new class extends Migration
 
         Schema::create('company_coupons', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
+            $table->string('name');
             $table->integer('num_chair');
             $table->integer('free_chair');
         });
