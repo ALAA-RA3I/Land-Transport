@@ -9,6 +9,7 @@ use App\Http\Controllers\interfaces;
 use App\Http\Controllers\Manager\Bus;
 use App\Http\Controllers\Manager\Drivers;
 use App\Http\Controllers\Trips\Trip;
+use App\Http\Controllers\ChartCtrl\Chart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +49,7 @@ Route::get('/addingexceptiontrip', [Trip::class, 'addExceptionTrip'])->name('add
 //
 Route::post('/addBusInformation',[Bus::class,'busInformation'])->name('recieveBusInfo');
 Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInformation'])->name('recieveTripInfo');
+
+
+Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
+Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');

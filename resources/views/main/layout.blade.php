@@ -29,7 +29,7 @@
                     <a href="#"><li>رحلات</li></a>
                     <a href="#"><li>تذاكر</li></a>
                     <a href="{{route('showCopouns')}}"><li>كوبونات</li></a>
-                    <a href="#"><li>إحصائيات</li></a>
+                    <a href="{{ route('statistcsSection') }}"><li>إحصائيات</li></a>
                 </ul>
 
                 @hasSection('title')
