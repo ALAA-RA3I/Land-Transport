@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::middleware('auth:user')->group(function () {
@@ -21,6 +22,22 @@ Route::middleware('auth:user')->group(function () {
 Route::post('register',[UserAuthController::class,'register'])->name('UserRegister');
 Route::post('login',[UserAuthController::class,'login'])->name('UserLogin');
 
+// Email Verification Routes
+Route::middleware('auth:user')->group(function () {
+    Route::get('/email/verify', function () {
+        return response()->json(['message' => 'Please verify your email address.'], 403);
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return response()->json(['message' => 'Email verified successfully!'], 200);
+    })->middleware(['signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return response()->json(['message' => 'Verification link sent!'], 200);
+    })->middleware('throttle:6,1')->name('verification.send');
+});
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
 
