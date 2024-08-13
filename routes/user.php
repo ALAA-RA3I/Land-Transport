@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:user')->group(function () {
     Route::post('/logout', [UserAuthController::class, 'logout'])->name('UserLogout');
+    Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
 });
 
 Route::post('register',[UserAuthController::class,'register'])->name('UserRegister');
@@ -22,7 +23,7 @@ Route::post('login',[UserAuthController::class,'login'])->name('UserLogin');
 
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
-Route::get('/showDetailsTrip/{id}',[BrowseTrips::class,'showMoreTripDetails'])->name('showRestTripDetails');
+
 Route::post('/searchAboutTrip',[BrowseTrips::class,'searchAboutTrip'])->name('searchAboutTripByDateOrFrTO');
 
 Route::post('/addNotify',[AddFavouriteTime::class,'addNotify'])->name('addNotify');

@@ -23,7 +23,6 @@
 
 
 @section('content')
-    <div class="content">
     <form action=" {{route('recieveBusInfo')}} " method="POST">
         @csrf
         <label for="bus_name">اسم الحافلة</label>
@@ -82,5 +81,4 @@
             class="submit"
         >
     </form>
-    </div>
 @endsection

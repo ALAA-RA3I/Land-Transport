@@ -16,8 +16,9 @@ class Chart extends Controller
         $manualBooking = Booking::where('booking_type' ,'Manual') ->count();
         $chart = (new LarapexChart)
             ->setType('area')
-            ->setTitle('احصائية نوع الدفع')
-            ->setSubtitle('تظهر هذه الاحصائية اعداد المستخدمين اللذين قاموا بالحجز يدوياً و إلكترونياً')
+            ->setColors(['#f8c62d'])
+            ->setTitle('')
+            ->setSubtitle('')
             ->setXAxis(['يدوي', 'إلكتروني'])
             ->setDataset([
                 [
