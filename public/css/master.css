@@ -196,7 +196,10 @@
 
 
 .contentOfNavbar{
-    width: 97%;
+    position: absolute;
+    top: 10%;
+    left: 20px;
+    width: 78%;
     min-height: 100px;
     max-height: 100vh;
     border-radius: 5px;

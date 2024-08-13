@@ -8,7 +8,6 @@ use App\Http\Controllers\Manager\Bus;
 use App\Http\Controllers\Manager\Copouns;
 use App\Http\Controllers\Manager\DisplayTrips;
 use App\Http\Controllers\Manager\Drivers;
-use App\Http\Controllers\Manager\Dis;
 use App\Http\Controllers\ChartCtrl\Chart;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +64,7 @@ Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInform
 
 Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
 Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
+Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
 Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
 Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
 
