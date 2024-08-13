@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('form_type', ["A","B"]);
             $table->integer('Branch_id');
             $table->foreign('Branch_id')->references('id')->on('branch');
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

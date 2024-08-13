@@ -7,11 +7,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Bu
- * 
+ *
  * @property int $id
  * @property string $bus_name
  * @property string $model
@@ -20,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $chair_count
  * @property string $form_type
  * @property int $Branch_id
- * 
+ *
  * @property Branch $branch
  * @property Collection|ShcedulingTime[] $shceduling_times
  * @property Collection|Trip[] $trips
@@ -29,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Bus extends Model
 {
+    use SoftDeletes ,HasFactory;
 	protected $table = 'bus';
 	public $incrementing = false;
 	public $timestamps = false;

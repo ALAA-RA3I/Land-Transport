@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class bus extends FormRequest
 {
@@ -25,7 +26,7 @@ class bus extends FormRequest
             'bus_name' => ['required', 'string'],
             'model' => ['required','string'],
             'type' => ['required','in:VIP,عادي'],
-            'bus_number' => ['required','numeric','unique:bus,bus_number'],
+            'bus_number' => ['required','numeric', Rule::unique('bus')->ignore($this->route('id')),],
             'form_type' => ['required','in:A,B'],
         ];
     }
@@ -39,7 +40,6 @@ class bus extends FormRequest
             'model.string' => 'موديل الحافلة يجب ان يكون نص',
             'type.required' => 'نوع الحافلة مطلوب',
             'type.in' => 'نوع الحافلة يجب ان يكون (عادي أو vip)',
-            'bus_number.required' => 'رقم الحافلة مطلوب',
             'bus_number.numeric' => 'رقم الحافلة يجب ان يكون رقم',
             'bus_number.unique' => 'رقم الحافلة موجود مسبقاً',
             'bus_number.required' => 'رقم الحافلة مطلوب ',
