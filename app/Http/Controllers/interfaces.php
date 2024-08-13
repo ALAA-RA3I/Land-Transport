@@ -9,9 +9,9 @@ class interfaces extends Controller
         return view('main.layout');
     }
 
-    public function showBusSection() {
-        return view('buses');
-    }
+//    public function showBusSection() {
+//        return view('buses');
+//    }
     public function showAvaliableTripsForBooking() {
         return view('showAvaliableTripsForBooking');
     }
@@ -20,5 +20,9 @@ class interfaces extends Controller
     }
     public function showTripsSection(){
         return view ('trips.trips');
+    }
+
+    public function showStatistcsSection(){
+        return view('main.navBarLayout');
     }
 }

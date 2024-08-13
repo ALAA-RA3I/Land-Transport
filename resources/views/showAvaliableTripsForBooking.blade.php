@@ -22,10 +22,7 @@
 
 
 @section('content')
-    <div class="content">
 
         {{-- replace 5 with the real tripID  --}}
         <a href="{{route('addManualBooking',13)}}"><li>حجز يدوي</li></a>  
-
-    </div>
 @endsection
