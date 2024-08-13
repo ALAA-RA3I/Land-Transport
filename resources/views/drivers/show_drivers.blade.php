@@ -78,7 +78,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        <table id="employeesTable" class="table table-striped nowrap" style="width:500px ;font-size:small  ">
+        <table id="employeesTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
             <thead>
             <tr>
                 <th>ID</th>

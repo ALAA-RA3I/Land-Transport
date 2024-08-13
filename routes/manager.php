@@ -2,15 +2,13 @@
 
 
 use App\Http\Controllers\Auth\ManagerAuthController;
-use App\Http\Controllers\Manager\AddBooking;
-use App\Http\Controllers\Manager\Copouns;
-
 use App\Http\Controllers\interfaces;
+use App\Http\Controllers\Manager\AddBooking;
 use App\Http\Controllers\Manager\Bus;
+use App\Http\Controllers\Manager\Copouns;
+use App\Http\Controllers\Manager\DisplayTrips;
 use App\Http\Controllers\Manager\Drivers;
-use App\Http\Controllers\Trips\Trip;
-
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Manager\Trip;
 use Illuminate\Support\Facades\Route;
 
 
@@ -57,5 +55,6 @@ Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('ad
 
 Route::get('/trips', [interfaces::class, 'showTripsSection'])->name('showTripsSection');
 Route::get('/addingexceptiontrip', [Trip::class, 'addExceptionTrip'])->name('addTripInfo');
-//
 Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInformation'])->name('recieveTripInfo');
+Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
+Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
