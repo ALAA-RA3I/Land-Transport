@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
@@ -37,7 +38,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class Driver  extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable ;
+    use HasApiTokens, HasFactory, Notifiable,SoftDeletes ;
 
     protected $table = 'driver';
 	protected $guard = 'driver';

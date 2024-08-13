@@ -9,9 +9,9 @@ class interfaces extends Controller
         return view('main.layout');
     }
 
-    public function showBusSection() {
-        return view('buses');
-    }
+//    public function showBusSection() {
+//        return view('buses');
+//    }
     public function showAvaliableTripsForBooking() {
         return view('showAvaliableTripsForBooking');
     }

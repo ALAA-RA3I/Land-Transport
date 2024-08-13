@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\DriverEmail;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DriverRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class DriverRequest extends FormRequest
         return [
             'Fname' => ['required', 'string'],
             'Lname' => ['required', 'string'],
-            'email' => ['required','email','unique:driver',new DriverEmail()],
+            'email' => ['required','email',Rule::unique('driver')->ignore($this->route('id')),new DriverEmail()],
             'password' => ['required', 'min:8','max:20'],
             'phone_number' => ['required', 'numeric'],
             'year_experince'=>['required', 'numeric'],

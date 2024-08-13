@@ -4,21 +4,19 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#employeesTable').DataTable({
+        var table = $('#BusesTable').DataTable({
             processing: true,
             serverSide: true,
             pageLength: 10,  // Set the number of rows to display
             lengthChange: false,  // Disable the ability to change the number of rows shown
-            ajax: '{{ route('showDrivers') }}',
+            ajax: '{{ route('showBusSection') }}',
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'Fname', name: 'Fname' },
-                { data: 'Lname', name: 'Lname' },
-                { data: 'email', name: 'email' },
-                { data: 'hire_date', name: 'hire_date' },
-                { data: 'phone_number', name: 'phone_number' },
-                { data: 'birthday', name: 'birthday' },
-                { data: 'year_experince', name: 'year_experince'},
+                { data: 'bus_name', name: 'bus_name' },
+                { data: 'model', name: 'model' },
+                { data: 'type', name: 'type' },
+                { data: 'bus_number', name: 'bus_number' },
+                { data: 'chair_count', name: 'chair_count' },
                 {
                     data: 'id',
                     name: 'action',
@@ -26,12 +24,12 @@
                     searchable: false,
                     render: function(data, type, row) {
                         return `
-                            <form action="{{ route('deleteDriver', '') }}/${data}" method="POST" style="display: inline;">
+                            <form action="{{ route('deleteBus', '') }}/${data}" method="POST" style="display: inline;">
                                 @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من حذف هذا السائق؟')" style=" position: relative ;right: 10px;">حذف</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من حذف هذا الباص؟')"> حذف الباص</button>
                     </form>
-                          `;
+                    `;
                     }
                 },
                 {
@@ -41,10 +39,11 @@
                     searchable: false,
                     render: function(data, type, row) {
                         return `
-                  <a  href="{{ route('editDriver', '') }}/${data}" class="btn btn-primary btn-sm" style=" position: relative ;right: 50px;">تعديل</a>
+                  <a  href="{{ route('editBus', '') }}/${data}" class="btn btn-primary btn-sm" style="position: absolute ;right: 1450px">تعديل</a>
                     `;
                     }
                 }
+
             ],
             responsive: true,
         });
@@ -56,19 +55,20 @@
     });
 </script>
 
-@section('titleOfPage','السائقين')
+@section('titleOfPage','الحافلات')
 
-@section('title','السائقين')
+@section('title','الحافلات')
 
 @section('logoutORback', route('showMainLayout'))
 
 @section('buttonText', 'عودة للقائمة الرئيسية')
 
-@section('titleOfBox','سائقين الفرع ')
+@section('titleOfBox','الحافلات المتوفرة ')
 
-@section('linkValue','إنشاء حساب سائق جديد')
+@section('linkValue','إضافة حافلة جديدة')
 
-@section('route', route('addDriver'))
+@section('route', route('busInfo'))
+
 
 @section('content')
     <div class="container" >
@@ -78,20 +78,18 @@
                 {{ session('success') }}
             </div>
         @endif
-        <table id="employeesTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
+        <table id="BusesTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>الاسم الأول</th>
-                <th>الاسم الاخير</th>
-                <th>الايميل</th>
-                <th>تاريخ التوظيف</th>
-                <th>رقم الموبايل</th>
-                <th>تاريخ الميلاد</th>
-                <th>سنوات الخبرة</th>
-                <th>حذف حساب</th>
-                <th>تعديل معلومات الحساب</th>
 
+                <th>ID</th>
+                <th>اسم الباص </th>
+                <th>الموديل </th>
+                <th>النوع </th>
+                <th> رقم الباص </th>
+                <th>عدد المقاعد </th>
+                <th> حذف الباص</th>
+                <th>تعديل معلومات الباص</th>
             </tr>
             </thead>
         </table>
@@ -100,5 +98,5 @@
 @endsection
 
 
-
 @include('components.button')
+
