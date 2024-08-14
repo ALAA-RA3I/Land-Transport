@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Trips;
+namespace App\Http\Controllers\Manager;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\trip as RequestsTrip;
 use App\Models\Bus;
 use App\Models\Driver;
 use App\Models\FromTo;
 use App\Models\Trip as ModelsTrip;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class Trip extends Controller
 {
-    public function addExceptionTrip() { 
+    public function addExceptionTrip() {
         $manager=Auth::guard('manager-web')->user();
         $branchTitle = $manager->branch->office_address;
         $buses = Bus::all();
@@ -35,6 +35,24 @@ class Trip extends Controller
 
         if($currentTrip) {
             return redirect()->back()->withErrors(['msg' => 'يوجد بالفعل رحلة بنفس وقت الانطلاق، التاريخ، ونفس الحافلة']);
+        }
+
+        $strat = $request->input('start_trip');
+        $end = $request->input('end_trip');
+        
+        $overlappingTrips = ModelsTrip::where('Driver_id', $request->input('Driver_id'))
+            ->where('Bus_id', $request->input('Bus_id'))
+            ->where(function($query) use ($strat, $end) {
+                $query->whereBetween('start_trip', [$strat, $end])
+                    ->orWhereBetween('end_trip', [$strat, $end])
+                    ->orWhere(function($query) use ($strat, $end) {
+                        $query->where('start_trip', '<', $strat)
+                                ->where('end_trip', '>', $end);
+                    });
+            })->get();
+        
+        if (!$overlappingTrips->isEmpty()) {
+            return redirect()->back()->withErrors(['msg' => 'لا يمكن إنشاء الرحلة الحالية، بسبب التداخل في المعلومات مع باقي الرحلات']);
         }
 
         ModelsTrip::create([

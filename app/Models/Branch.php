@@ -7,16 +7,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Branch
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $office_address
  * @property int $phone_number
- * 
+ *
  * @property Collection|Booking[] $bookings
  * @property Collection|Bu[] $bus
  * @property Collection|Driver[] $drivers
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Branch extends Model
 {
+    use HasFactory;
 	protected $table = 'branch';
 	public $incrementing = false;
 	public $timestamps = false;

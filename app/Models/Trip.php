@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Trip extends Model
 {
+    use HasFactory;
     protected $table = 'trips';
     public $incrementing = false;
     public $timestamps = false;
@@ -106,25 +108,25 @@ class Trip extends Model
     public function scopeSpecificDate($query, $date)
     {
         return $query->whereDate('date', $date)->where('available_chair', '>', '0')
-            ->select('trips.id', 'date', 'start_trip', 'end_trip', 'From_To_id', 'Bus_id')
+            ->select('trips.id', 'date', 'start_trip', 'end_trip','cost', 'From_To_id', 'Bus_id')
             ->with('from_to:id,source,destination', 'bus:id,type');
     }
     public function scopeSpecificDatePlace($query, $date,$from_to)
     {
         return $query->whereDate('date', $date)->where('From_To_id','=',$from_to)->where('available_chair', '>', '0')
-            ->select('trips.id', 'date', 'start_trip', 'end_trip', 'From_To_id', 'Bus_id')
+            ->select('trips.id', 'date', 'start_trip', 'end_trip','cost','From_To_id', 'Bus_id')
             ->with('from_to:id,source,destination', 'bus:id,type');
     }
     public function scopeSpecificPlace($query,$from_to)
     {
         return $query->where('From_To_id','=',$from_to)->where('available_chair', '>', '0')
-            ->select('trips.id', 'date', 'start_trip', 'end_trip', 'From_To_id', 'Bus_id')
+            ->select('trips.id', 'date', 'start_trip', 'end_trip','cost', 'From_To_id', 'Bus_id')
             ->with('from_to:id,source,destination', 'bus:id,type');
     }
 
     public function scopeMoreDetails($query, $id)
     {
-        return $query->select('cost', 'available_chair', 'Bus_id', 'Driver_id')
+        return $query->select('available_chair', 'Bus_id', 'Driver_id')
             ->with(['bus:id,bus_name,model,bus_number,chair_count,form_type', 'driver:id,Fname,Lname'])
             ->where('id', $id);
     }
