@@ -37,6 +37,24 @@ class Trip extends Controller
             return redirect()->back()->withErrors(['msg' => 'يوجد بالفعل رحلة بنفس وقت الانطلاق، التاريخ، ونفس الحافلة']);
         }
 
+        $strat = $request->input('start_trip');
+        $end = $request->input('end_trip');
+        
+        $overlappingTrips = ModelsTrip::where('Driver_id', $request->input('Driver_id'))
+            ->where('Bus_id', $request->input('Bus_id'))
+            ->where(function($query) use ($strat, $end) {
+                $query->whereBetween('start_trip', [$strat, $end])
+                    ->orWhereBetween('end_trip', [$strat, $end])
+                    ->orWhere(function($query) use ($strat, $end) {
+                        $query->where('start_trip', '<', $strat)
+                                ->where('end_trip', '>', $end);
+                    });
+            })->get();
+        
+        if (!$overlappingTrips->isEmpty()) {
+            return redirect()->back()->withErrors(['msg' => 'لا يمكن إنشاء الرحلة الحالية، بسبب التداخل في المعلومات مع باقي الرحلات']);
+        }
+
         ModelsTrip::create([
             'date' => $request->input('date'),
             'start_trip' => $request->input('start_trip'),

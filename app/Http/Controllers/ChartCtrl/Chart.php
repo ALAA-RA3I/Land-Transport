@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ChartCtrl;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Ticket;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Facades\DB;
 
@@ -62,5 +63,36 @@ class Chart extends Controller
         ->setWidth(500)
         ->setColors(['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845']);
         return view('charts.age',compact('chart'));
+    }
+
+    public function showMostRequestedTimes() {
+        $startTimes = Ticket::with(['booking.trip'])
+        ->get()
+        ->groupBy('booking.trip.start_trip')
+        ->map(function ($group) {
+            return $group->count();
+        });
+    
+        $timeGroups = [];
+        foreach ($startTimes as $time => $count) {
+            $hour = date('H:00', strtotime($time));  
+            if (!isset($timeGroups[$hour])) {
+                $timeGroups[$hour] = 0;
+            }
+            $timeGroups[$hour] += $count;
+        }
+    
+        $chart = (new LarapexChart)
+            ->setType('pie')
+            ->setTitle('')
+            ->setSubtitle('')
+            ->setLabels(array_keys($timeGroups))
+            ->setDataset(array_values($timeGroups))
+            ->setColors(['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845',"#17A2B8","#28A745",'#6C757D '])
+            ->setHeight(500)
+            ->setWidth(500);
+
+            return view('charts.time',compact('chart'));
+
     }
 }

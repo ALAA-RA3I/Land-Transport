@@ -15,7 +15,7 @@
                 <ul class="choises">
                     <a href="{{route('paymentTypeStatistics')}}"><li>إحصائية نوع الدفع</li></a>
                     <a href="{{ route('ageStatistics') }}"><li>إحصائية الأعمار </li></a>
-                    <a href="#"><li>إحصائية الأوقات الأكثر طلباً</li></a>
+                    <a href="{{route('timeStatistics')}}"><li>إحصائية الأوقات الأكثر طلباً</li></a>
                 </ul>
                 <a class="logout" href="@yield('logoutORback',route('showMainLayout'))">@yield('buttonText', 'العودة للقائمة الرئيسية')</a>
             </div>

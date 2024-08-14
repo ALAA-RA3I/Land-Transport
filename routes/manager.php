@@ -65,6 +65,7 @@ Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInform
 Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
 Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
 Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
+Route::get('/timeStatistics', [Chart::class, 'showMostRequestedTimes'])->name('timeStatistics');
 Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
 Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
 
