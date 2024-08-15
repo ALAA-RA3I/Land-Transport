@@ -18,13 +18,20 @@ class controlBooking extends Controller
         $userId = Auth::guard('user')->user()->id;
         $bookingInfo = Booking::where('User_id', $userId)
         ->with(['trip' => function ($query) {
-            $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id')
+            $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id','status')
                 ->with(['from_to' => function ($subQuery) {
                 $subQuery->select('id', 'source', 'destination');
                 }]);
         }])->get();
-
-        return $this->apiResponse($bookingInfo,'حجوزاتي',200);
+        if(!$userId){
+            return $this->apiResponse('','مستخدم غير موجود',404);
+        }
+        foreach ($bookingInfo as $booking) {
+            if ($booking->trip->status === "Wait") {
+                return $this->apiResponse($bookingInfo, 'حجوزاتي', 200);
+            }
+        }
+            return $this->apiResponse($bookingInfo,'حجوزاتي السابقة',200);
     }
 
     public function cancelBooking($bookingId){
