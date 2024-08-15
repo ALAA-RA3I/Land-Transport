@@ -15,7 +15,7 @@ class DriverTrips extends Controller
 {
     use ApiResponse;
     public function showMyUpcomingTrips() {
-        $driverId = Auth::guard('user')->user()->id;
+        $driverId = Auth::guard('driver')->user()->id;
         $driverTrips = Trip::where([
                                     ['Driver_id', $driverId],
                                     ['status','Wait']
@@ -34,7 +34,7 @@ class DriverTrips extends Controller
     }
 
     public function showMyPreviousTrips() {
-        $driverId = Auth::guard('user')->user()->id;
+        $driverId = Auth::guard('driver')->user()->id;
         $driverTrips = Trip::where([
             ['Driver_id', $driverId],
             ['status', 'Done']
@@ -53,7 +53,7 @@ class DriverTrips extends Controller
     }
 
     public function showCurrentTrip() {
-        $driverId = Auth::guard('user')->user()->id;
+        $driverId = Auth::guard('driver')->user()->id;
         $driverTrips = Trip::where([
             ['Driver_id', $driverId],
             ['status', 'Progress']
@@ -75,7 +75,7 @@ class DriverTrips extends Controller
         $day=Carbon::now()->format('Y-m-d');
         $currentTime = Carbon::now()->addHours(3)->toTimeString();
         $endTime=Carbon::now()->addHours(3)->toTimeString();
-        $driverId = Auth::guard('user')->user()->id;
+        $driverId = Auth::guard('driver')->user()->id;
         $status = Trip::where('id',$tripId)
                         ->where('Driver_id',$driverId)
                         ->whereDate('date',$day)
