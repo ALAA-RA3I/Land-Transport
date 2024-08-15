@@ -1,12 +1,13 @@
 @extends('main.navBarLayout')
 
-@section('titleOfPage','إحصائية الدفع')
+@section('titleOfPage','إحصائية الأعمار')
 
 @section('content')
         <div class="contentOfNavbar">
+            <div class="chart-container">
         <div>
-            <h2 class="chart-title">احصائية نوع الدفع</h2>
-            <h4 class="chart-subtitle">تظهر هذه الاحصائية اعداد المستخدمين اللذين قاموا بالحجز يدوياً و إلكترونياً</h4>
+            <h2 class="chart-title">احصائية الأعمار</h2>
+            <h4 class="chart-subtitle">تظهر هذه الاحصائية نسبة الاًعمار التي تقوم بحجز رحلات </h4>
         </div>
 
         {!! $chart->container() !!}
@@ -14,6 +15,7 @@
         <script src="{{ $chart->cdn() }}"></script>
     
         {{ $chart->script() }}
+            </div>
         </div>
 @endsection
 
@@ -30,5 +32,11 @@
     font-size: 16px;
     margin-top: 2px;
     color: #666;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

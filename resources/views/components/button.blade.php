@@ -19,4 +19,9 @@
     font-size: 18px;
     font-weight: bold;
     }
+
+    .submit:hover{
+        background-color: #eee;
+        color: #333;
+    }
 </style>

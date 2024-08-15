@@ -8,7 +8,6 @@ use App\Http\Controllers\Manager\Bus;
 use App\Http\Controllers\Manager\Copouns;
 use App\Http\Controllers\Manager\DisplayTrips;
 use App\Http\Controllers\Manager\Drivers;
-use App\Http\Controllers\Manager\Dis;
 use App\Http\Controllers\ChartCtrl\Chart;
 use App\Http\Controllers\Manager\Tickets;
 use App\Models\Booking;
@@ -47,10 +46,6 @@ Route::get('/showAvaliableTripsForBooking', [AddBooking::class, 'showAvaliableTr
 Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
 Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
 
-Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
-Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
-
-///////////////////////////////////////// coupons ////////////////////////////////////////////////////
 Route::get('/showCopouns', [Copouns::class, 'showCopouns'])->name('showCopouns');
 Route::delete('/coupons/{id}', [Copouns::class, 'destroy'])->name('coupons.destroy');
 Route::get('/couponsForCreate', [Copouns::class, 'couponsForCreate'])->name('couponsForCreate');
@@ -61,6 +56,13 @@ Route::post('/coupons_create', [Copouns::class, 'create'])->name('coupons.create
 Route::get('/trips', [interfaces::class, 'showTripsSection'])->name('showTripsSection');
 Route::get('/addingexceptiontrip', [Trip::class, 'addExceptionTrip'])->name('addTripInfo');
 Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInformation'])->name('recieveTripInfo');
+
+
+
+Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
+Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
+Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
+Route::get('/timeStatistics', [Chart::class, 'showMostRequestedTimes'])->name('timeStatistics');
 Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
 Route::get('/doneTrips',[DisplayTrips::class,'displayDoneTrips'])->name('showDoneTrips');
 Route::get('/waitTrips',[DisplayTrips::class,'displayWaitTrips'])->name('showWaitTrips');

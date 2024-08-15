@@ -169,13 +169,12 @@
 .navigation .content{
     width: 95%;
     min-height: 100px;
-    max-height: 78vh;
+    max-height: 80vh;
     border-radius: 5px;
     border: 2px solid #f8c62d;
     overflow: auto;
     background-color: #ddd;
-    margin-top:30px ;
-    margin-right:15px ;
+    margin:10px auto 10px;
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -189,14 +188,17 @@
     position: absolute;
     left:35%;
     top:55%;
-    background-image: rgb(60, 104, 104);
+//    background-image: rgb(60, 104, 104);
     transform: translate(-50%, -50%);
     opacity: 0.3;
 }
 
 
 .contentOfNavbar{
-    width: 97%;
+    position: absolute;
+    top: 10%;
+    left: 20px;
+    width: 78%;
     min-height: 100px;
     max-height: 100vh;
     border-radius: 5px;
