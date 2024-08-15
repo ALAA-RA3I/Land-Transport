@@ -8,6 +8,7 @@ use App\Models\Bus;
 use App\Models\Driver;
 use App\Models\FromTo;
 use App\Models\Trip as ModelsTrip;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class Trip extends Controller
@@ -37,24 +38,28 @@ class Trip extends Controller
             return redirect()->back()->withErrors(['msg' => 'يوجد بالفعل رحلة بنفس وقت الانطلاق، التاريخ، ونفس الحافلة']);
         }
 
-        $strat = $request->input('start_trip');
-        $end = $request->input('end_trip');
+        $startTrip = Carbon::parse($request->input('start_trip'));
+        $endTrip = Carbon::parse($request->input('end_trip'));
+        $dateTrip = Carbon::parse($request->input('date'));
         
         $overlappingTrips = ModelsTrip::where('Driver_id', $request->input('Driver_id'))
             ->where('Bus_id', $request->input('Bus_id'))
-            ->where(function($query) use ($strat, $end) {
-                $query->whereBetween('start_trip', [$strat, $end])
-                    ->orWhereBetween('end_trip', [$strat, $end])
-                    ->orWhere(function($query) use ($strat, $end) {
-                        $query->where('start_trip', '<', $strat)
-                                ->where('end_trip', '>', $end);
+            ->where('date', $dateTrip)
+            ->where(function($query) use ($startTrip, $endTrip) {
+                $query->whereBetween('start_trip', [$startTrip, $endTrip])
+                    ->orWhereBetween('end_trip', [$startTrip, $endTrip])
+                    ->orWhere(function($query) use ($startTrip, $endTrip) {
+                        $query->where('start_trip', '<=', $startTrip)
+                                ->where('end_trip', '>=', $endTrip);
                     });
-            })->get();
+            })
+            ->exists();
         
-        if (!$overlappingTrips->isEmpty()) {
+        if ($overlappingTrips) {
+            // dd($overlappingTrips);
             return redirect()->back()->withErrors(['msg' => 'لا يمكن إنشاء الرحلة الحالية، بسبب التداخل في المعلومات مع باقي الرحلات']);
-        }
-
+        }        
+    // echo "no";
         ModelsTrip::create([
             'date' => $request->input('date'),
             'start_trip' => $request->input('start_trip'),

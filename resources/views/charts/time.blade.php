@@ -1,6 +1,6 @@
 @extends('main.navBarLayout')
 
-@section('titleOfPage','إحصائية الدفع')
+@section('titleOfPage','إحصائية الأعمار')
 
 @section('content')
         <div class="contentOfNavbar">
