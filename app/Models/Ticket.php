@@ -6,11 +6,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Ticket
- * 
+ *
  * @property int $id
  * @property int $tickets_num
  * @property string $first_name
@@ -21,13 +22,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $presence_travellet
  * @property int $age
  * @property int $Booking_id
- * 
+ *
  * @property Booking $booking
  *
  * @package App\Models
  */
 class Ticket extends Model
 {
+    use HasFactory;
 	protected $table = 'tickets';
 	public $incrementing = false;
 	public $timestamps = false;
@@ -58,4 +60,5 @@ class Ticket extends Model
 	{
 		return $this->belongsTo(Booking::class, 'Booking_id');
 	}
+
 }

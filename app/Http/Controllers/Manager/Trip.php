@@ -52,5 +52,48 @@ class Trip extends Controller
 
         return redirect()->route('showTripsSection')->with('good','تمت إضافة رحلة جديدة بنجاح');
     }
+ public  function editTrip($id){
+     $trip = \App\Models\Trip::findOrFail($id);
+     $manager=Auth::guard('manager-web')->user();
+     $branchTitle = $manager->branch->office_address;
+     $buses = Bus::all();
+     $places = FromTo::where('source', $branchTitle)->pluck('destination','id');
+     $drivers = Driver::all();
+     return view('trips.editTrip',compact('trip'))
+         ->with('buses',$buses)
+         ->with('places',$places)
+         ->with('drivers',$drivers);
+ }
+    public function updateTrip(RequestsTrip $request,$id) {
+        $branchId=Auth::guard('manager-web')->user()->Branch_id;
+        $bus = Bus::findOrFail($request->input('Bus_id'));
+        $chair = $bus->chair_count;
+        $currentTrip = ModelsTrip::where('date', $request->input('date'))
+            ->where('start_trip',$request->input('start_trip'))
+            ->where('Bus_id', $request->input('Bus_id'))
+            ->first();
 
+        if($currentTrip) {
+            return redirect()->back()->withErrors(['msg' => 'يوجد بالفعل رحلة بنفس وقت الانطلاق، التاريخ، ونفس الحافلة']);
+        }
+        $trip = \App\Models\Trip::findOrFail($id);
+           $trip->update([
+               'date' => $request->input('date'),
+               'start_trip' => $request->input('start_trip'),
+               'end_trip' => $request->input('end_trip'),
+               'Driver_id' => $request->input('Driver_id'),
+               'Bus_id' => $request->input('Bus_id'),
+               'From_To_id' => $request->input('From_To_id'),
+               'cost' => $request->input('cost'),
+           ]);
+
+
+        return redirect()->route('showWaitTrips')->with('success','تم تحديث معلومات الرحلة بنجاح');
+    }
+    public function deleteTrip($id){
+        $trip = \App\Models\Trip::findOrFail($id);
+        $trip->delete();
+        return redirect()->back()->with('success', 'تم حذف الرحلة بنجاح');
+
+    }
 }
