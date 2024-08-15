@@ -58,4 +58,15 @@ class controlBooking extends Controller
             }
         return $this->apiResponse('','تم إلغاء الحجز بنجاح',200);
     }
+
+    public function showTickets($bookingId){
+        $userId = Auth::guard('user')->user()->id;
+        $tickets = Booking::where([
+            ['id',$bookingId],
+            ['User_id',$userId] 
+        ])->With('tickets')->first();
+        if(!$tickets)
+            return $this->apiResponse('','لا يوجد تذاكر',404);
+        return $this->apiResponse($tickets->tickets,'تذاكر الحجز',200);
+    }
 }
