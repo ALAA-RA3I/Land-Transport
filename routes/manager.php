@@ -46,6 +46,7 @@ Route::get('/showAvaliableTripsForBooking', [AddBooking::class, 'showAvaliableTr
 Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
 Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
 
+///////////////// copuns //////////////
 Route::get('/showCopouns', [Copouns::class, 'showCopouns'])->name('showCopouns');
 Route::delete('/coupons/{id}', [Copouns::class, 'destroy'])->name('coupons.destroy');
 Route::get('/couponsForCreate', [Copouns::class, 'couponsForCreate'])->name('couponsForCreate');
@@ -57,12 +58,6 @@ Route::get('/trips', [interfaces::class, 'showTripsSection'])->name('showTripsSe
 Route::get('/addingexceptiontrip', [Trip::class, 'addExceptionTrip'])->name('addTripInfo');
 Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInformation'])->name('recieveTripInfo');
 
-
-
-Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
-Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
-Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
-Route::get('/timeStatistics', [Chart::class, 'showMostRequestedTimes'])->name('timeStatistics');
 Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
 Route::get('/doneTrips',[DisplayTrips::class,'displayDoneTrips'])->name('showDoneTrips');
 Route::get('/waitTrips',[DisplayTrips::class,'displayWaitTrips'])->name('showWaitTrips');
@@ -89,7 +84,10 @@ Route::delete('/cancelTicket/{id}',[Tickets::class,'cancelTicket'])->name('cance
 /////////////////////////// statistics ////////////////////////////////////////////
 Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
 Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
-
+Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
+Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
+Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
+Route::get('/timeStatistics', [Chart::class, 'showMostRequestedTimes'])->name('timeStatistics');
 
 
 
