@@ -18,13 +18,20 @@ class controlBooking extends Controller
         $userId = Auth::guard('user')->user()->id;
         $bookingInfo = Booking::where('User_id', $userId)
         ->with(['trip' => function ($query) {
-            $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id')
+            $query->select('id', 'trip_num', 'date', 'start_trip', 'end_trip', 'Bus_id', 'trip_type', 'From_To_id','status')
                 ->with(['from_to' => function ($subQuery) {
                 $subQuery->select('id', 'source', 'destination');
                 }]);
         }])->get();
-
-        return $this->apiResponse($bookingInfo,'حجوزاتي',200);
+        if(!$userId){
+            return $this->apiResponse('','مستخدم غير موجود',404);
+        }
+        foreach ($bookingInfo as $booking) {
+            if ($booking->trip->status === "Wait") {
+                return $this->apiResponse($bookingInfo, 'حجوزاتي', 200);
+            }
+        }
+            return $this->apiResponse($bookingInfo,'حجوزاتي السابقة',200);
     }
 
     public function cancelBooking($bookingId){
@@ -57,5 +64,16 @@ class controlBooking extends Controller
                 return response()->json(['message' => 'حدث خطأ أثناء معالجة عملية الاسترداد'], 500);
             }
         return $this->apiResponse('','تم إلغاء الحجز بنجاح',200);
+    }
+
+    public function showTickets($bookingId){
+        $userId = Auth::guard('user')->user()->id;
+        $tickets = Booking::where([
+            ['id',$bookingId],
+            ['User_id',$userId] 
+        ])->With('tickets')->first();
+        if(!$tickets)
+            return $this->apiResponse('','لا يوجد تذاكر',404);
+        return $this->apiResponse($tickets->tickets,'تذاكر الحجز',200);
     }
 }

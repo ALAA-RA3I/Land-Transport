@@ -33,7 +33,7 @@ class UserActions extends Controller
 
         Stripe::setApiKey(config('services.stripe.test'));
 
-        if($tripInfo->status === "Done"){
+        if($tripInfo->status === "Done" || $tripInfo->status === "Progress"){
             return $this->apiResponse('','الرحلة قد انتهت،لا يمكنك الحجز فيها',409);
         }
         $today = Carbon::now()->format('Y-m-d');
