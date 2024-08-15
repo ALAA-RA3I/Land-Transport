@@ -8,11 +8,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Booking
- * 
+ *
  * @property int $id
  * @property int $User_id
  * @property int $Manager_id
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $booking_type
  * @property int $Branch_id
  * @property string $charge_id
- * 
+ *
  * @property Branch $branch
  * @property Manager $manager
  * @property Trip $trip
@@ -33,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Booking extends Model
 {
+    use HasFactory;
 	protected $table = 'booking';
 	public $incrementing = false;
 	public $timestamps = false;

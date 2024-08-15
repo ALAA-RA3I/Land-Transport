@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Driver;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\Ticket;
 use App\Models\Trip;
 use App\Trait\ApiResponse;
 use Carbon\Carbon;
@@ -85,6 +87,12 @@ class DriverTrips extends Controller
         }
         switch($status->status){
             case 'Wait':
+                $booking=Booking::where('Trip_id',$status->id)
+                        ->with('tickets')->first();
+                foreach($booking->tickets as $tickets){
+                $tickets->is_used = true;
+                $tickets->save();
+                }
                 $status->status='Progress';
                 $status->save();
             break;
@@ -98,7 +106,7 @@ class DriverTrips extends Controller
             break;
             default:
             return $this->apiResponse('','لا يمكن تغيير حالة هذه الرحلة',400);
-        }
+        }   
         return $this->apiResponse('','تم تغيير حالة الرحلة بنجاح',200);
     }
 }

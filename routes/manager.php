@@ -9,6 +9,9 @@ use App\Http\Controllers\Manager\Copouns;
 use App\Http\Controllers\Manager\DisplayTrips;
 use App\Http\Controllers\Manager\Drivers;
 use App\Http\Controllers\ChartCtrl\Chart;
+use App\Http\Controllers\Manager\Tickets;
+use App\Models\Booking;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Manager\Trip;
@@ -38,34 +41,54 @@ Route::get('/bus/edit/{id}', [Bus::class, 'edit_bus'])->name('editBus');
 Route::put('/bus/update/{id}', [Bus::class, 'update_bus'])->name('updateBus');
 
 
-
-
-
-
+//////////////////////////////////////// booking /////////////////////////////////////////////////////
 Route::get('/showAvaliableTripsForBooking', [AddBooking::class, 'showAvaliableTripsForBooking'])->name('showAvaliableTripsForBooking');
 Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
 Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
 
+///////////////// copuns //////////////
 Route::get('/showCopouns', [Copouns::class, 'showCopouns'])->name('showCopouns');
 Route::delete('/coupons/{id}', [Copouns::class, 'destroy'])->name('coupons.destroy');
 Route::get('/couponsForCreate', [Copouns::class, 'couponsForCreate'])->name('couponsForCreate');
 Route::post('/coupons_create', [Copouns::class, 'create'])->name('coupons.create');
 
 
-Route::get('/addManualBooking/{tripID}', [AddBooking::class, 'addManualBooking'])->name('addManualBooking');
-Route::post('/addBooking/{tripID}', [AddBooking::class, 'addBooking'])->name('addBooking');
-
-
+////////////////////////////////////////// trips //////////////////////////////////////
 Route::get('/trips', [interfaces::class, 'showTripsSection'])->name('showTripsSection');
 Route::get('/addingexceptiontrip', [Trip::class, 'addExceptionTrip'])->name('addTripInfo');
 Route::post('/addExceptionalTripInformation',[Trip::class,'exceptionalTripInformation'])->name('recieveTripInfo');
 
+Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
+Route::get('/doneTrips',[DisplayTrips::class,'displayDoneTrips'])->name('showDoneTrips');
+Route::get('/waitTrips',[DisplayTrips::class,'displayWaitTrips'])->name('showWaitTrips');
+Route::get('/editWaitTrip/{id}', [Trip::class, 'editTrip'])->name('editWaitTrip');
+Route::put('/updateWaitTrip/{id}', [Trip::class, 'updateTrip'])->name('updateWaitTrip');
+Route::delete('/deleteWaitTrip/{id}', [Trip::class, 'deleteTrip'])->name('deleteWaitTrip');
+Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
+Route::get('/availableTrips',[DisplayTrips::class,'displayAvailableTrips'])->name('showAvailableTrips');
 
 
+////////////////////// tickets //////////////////////////////////
+Route::get('/displayTickets',[Tickets::class,'showTickets'])->name('showTickets');
+Route::get('/displayWaitTickets/{id}',[Tickets::class,'showTicketsOfWaitTrip'])->name('showWaitTripTickets');
+Route::get('/displayDoneTickets/{id}',[Tickets::class,'showTicketsOfDoneTrip'])->name('showDoneTripTickets');
+Route::get('/ConfirmPassengerAttendance/{id}',[Tickets::class,'confirmPassengerAttendance'])->name('ConfirmPassengerAttendance');
+Route::delete('/cancelTicket/{id}',[Tickets::class,'cancelTicket'])->name('cancelTicket');
+
+
+
+
+
+
+
+/////////////////////////// statistics ////////////////////////////////////////////
+Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
+Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
 Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name('statistcsSection');
 Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
 Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
 Route::get('/timeStatistics', [Chart::class, 'showMostRequestedTimes'])->name('timeStatistics');
-Route::get('/currentTrips',[DisplayTrips::class,'displayCurrenTrips'])->name('showCurrentTrips');
-Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
+
+
+
 

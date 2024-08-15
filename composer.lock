@@ -4724,8 +4724,7 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
-<<<<<<< HEAD
-=======
+
             "name": "stripe/stripe-php",
             "version": "v15.6.0",
             "source": {
@@ -4785,7 +4784,6 @@
             "time": "2024-08-08T23:56:48+00:00"
         },
         {
->>>>>>> 7086cf2bb746e24dd626c55c46cc980972f60eb5
             "name": "symfony/clock",
             "version": "v7.1.1",
             "source": {
@@ -8444,8 +8442,7 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2024-08-02T07:45:47+00:00"
-<<<<<<< HEAD
-=======
+
         },
         {
             "name": "laravel/ui",
@@ -8509,7 +8506,7 @@
                 "source": "https://github.com/laravel/ui/tree/v4.5.2"
             },
             "time": "2024-05-08T18:07:10+00:00"
->>>>>>> 7086cf2bb746e24dd626c55c46cc980972f60eb5
+
         },
         {
             "name": "mockery/mockery",
@@ -9194,7 +9191,7 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
+
             "version": "11.3.0",
             "source": {
                 "type": "git",
@@ -9205,7 +9202,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a8dce73a8938dfec7ac0daa91bdbcaae7d7188a3",
                 "reference": "a8dce73a8938dfec7ac0daa91bdbcaae7d7188a3",
-=======
+
             "version": "11.3.1",
             "source": {
                 "type": "git",
@@ -9216,7 +9213,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fe179875ef0c14e90b75617002767eae0a742641",
                 "reference": "fe179875ef0c14e90b75617002767eae0a742641",
->>>>>>> 7086cf2bb746e24dd626c55c46cc980972f60eb5
+
                 "shasum": ""
             },
             "require": {
@@ -9287,11 +9284,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-<<<<<<< HEAD
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.3.0"
-=======
+
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.3.0",
+
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.3.1"
->>>>>>> 7086cf2bb746e24dd626c55c46cc980972f60eb5
+
             },
             "funding": [
                 {
@@ -9307,12 +9304,12 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-08-02T03:56:43+00:00"
-=======
+
+            "time": "2024-08-02T03:56:43+00:00",
+
             "time": "2024-08-13T06:14:23+00:00"
->>>>>>> 7086cf2bb746e24dd626c55c46cc980972f60eb5
-        },
+
+        }},
         {
             "name": "psr/cache",
             "version": "3.0.0",

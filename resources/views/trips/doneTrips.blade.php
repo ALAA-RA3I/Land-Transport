@@ -1,35 +1,32 @@
 @extends('main.layout')
 @include('cdn.JQuery')
 @include('cdn.Search_datatable')
-<link href="{{asset('css/seconde.css')}}" rel="stylesheet">
 
 <script>
     $(document).ready(function() {
-        var table = $('#AvailableTripsTable').DataTable({
+        var table = $('#DoneTripsTable').DataTable({
             processing: true,
             serverSide: true,
             pageLength: 10,  // Set the number of rows to display
             lengthChange: false,  // Disable the ability to change the number of rows shown
-            ajax: '{{ route('showAvailableTrips') }}',
+            ajax: '{{ route('showDoneTrips',) }}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'trip_num', name: 'trip_num' },
                 { data: 'date', name: 'date' },
                 { data: 'start_trip', name: 'start_trip' },
                 { data: 'end_trip', name: 'end_trip' },
-                { data: 'available_chair', name: 'available_chair' },
-                { data: 'cost', name: 'cost' },
-                { data: 'driver_name', name: 'driver_name' },
-                { data: 'bus_name', name: 'bus_name' },
-                { data: 'source', name: 'source' },
-                { data: 'destination', name: 'destination' },
+                { data: 'driver_name', name: 'driver_name' },  // Display the driver's name
+                { data: 'bus_name', name: 'bus_name' },            // Display the bus name
+                { data: 'source', name: 'source' },                 // Display the source location
+                { data: 'destination', name: 'destination' },  // Display the destination location
                 {  data: 'id',
                     name: 'action',
                     orderable: false,
                     searchable: false,
                     render: function(data, type, row) {
                         return `
-                  <a  href="{{ route('addManualBooking', '')}}/${data}" class="btn btn-dark" data-mdb-ripple-init>إضافة حجز يدوي</a>
+                  <a  href="{{ route('showDoneTripTickets', '')}}/${data}" class="btn btn-info">عرض المسافرين</a>
                     `;
                     }
                 }
@@ -44,11 +41,12 @@
     });
 </script>
 
-@section('titleOfPage','الرحلات المتوفرة')
 
-@section('title','الحافلات المتوفرة')
-@section('titleOfBox','الرحلات المتوفر بها مقاعد ')
+@section('titleOfPage','الرحلات المنجزة')
 
+@section('title','الرحلات المنجزة')
+
+@section('titleOfBox','الرحلات المنجزة ')
 
 @section('logoutORback', route('showMainLayout'))
 
@@ -63,7 +61,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        <table id="AvailableTripsTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
+        <table id="DoneTripsTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
             <thead>
             <tr>
                 <th>ID</th>
@@ -71,13 +69,11 @@
                 <th>تاريخ الرحلة</th>
                 <th>وقت الانطلاق </th>
                 <th>وقت الوصول </th>
-                <th>المقاعد المتوفرة</th>
-                <th>التكلفة</th>
                 <th>السائق</th>
                 <th>رقم الباص </th>
                 <th>من</th>
                 <th>إلى</th>
-                <th>حجز يدوي</th>
+                <th>تفاصيل المسافرين</th>
 
 
             </tr>
@@ -87,7 +83,5 @@
     </div>
 @endsection
 
-@section('content')
 
 
-@endsection

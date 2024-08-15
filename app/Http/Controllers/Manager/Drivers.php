@@ -50,6 +50,7 @@ class Drivers extends Controller
     }
     public function update_driver(DriverRequest $request,$id){
         $driver = Driver::findOrFail($id);
+        $request['password'] = bcrypt($request->input('password'));
         $driver->update($request->all());
         return redirect()->route('showDrivers')->with('success', 'تم تحديث معلومات السائق بنجاح');
     }

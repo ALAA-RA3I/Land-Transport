@@ -1,16 +1,15 @@
 @extends('main.layout')
 @include('cdn.JQuery')
 @include('cdn.Search_datatable')
-<link href="{{asset('css/seconde.css')}}" rel="stylesheet">
 
 <script>
     $(document).ready(function() {
-        var table = $('#AvailableTripsTable').DataTable({
+        var table = $('#CurrentTripsTable').DataTable({
             processing: true,
             serverSide: true,
             pageLength: 10,  // Set the number of rows to display
             lengthChange: false,  // Disable the ability to change the number of rows shown
-            ajax: '{{ route('showAvailableTrips') }}',
+            ajax: '{{ route('showCurrentTrips') }}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'trip_num', name: 'trip_num' },
@@ -19,17 +18,17 @@
                 { data: 'end_trip', name: 'end_trip' },
                 { data: 'available_chair', name: 'available_chair' },
                 { data: 'cost', name: 'cost' },
-                { data: 'driver_name', name: 'driver_name' },
-                { data: 'bus_name', name: 'bus_name' },
-                { data: 'source', name: 'source' },
-                { data: 'destination', name: 'destination' },
+                { data: 'driver_name', name: 'driver_name' },  // Display the driver's name
+                { data: 'bus_name', name: 'bus_name' },            // Display the bus name
+                { data: 'source', name: 'source' },                 // Display the source location
+                { data: 'destination', name: 'destination' },  // Display the destination location
                 {  data: 'id',
                     name: 'action',
                     orderable: false,
                     searchable: false,
                     render: function(data, type, row) {
                         return `
-                  <a  href="{{ route('addManualBooking', '')}}/${data}" class="btn btn-dark" data-mdb-ripple-init>إضافة حجز يدوي</a>
+                  <a  href="{{ route('FollowTripOnMap', '')}}/${data}" class="btn btn-info">تتبع الرحلة</a>
                     `;
                     }
                 }
@@ -44,11 +43,12 @@
     });
 </script>
 
-@section('titleOfPage','الرحلات المتوفرة')
 
-@section('title','الحافلات المتوفرة')
-@section('titleOfBox','الرحلات المتوفر بها مقاعد ')
+@section('titleOfPage','الرحلات الجارية')
 
+@section('title','الرحلات الجارية')
+
+@section('titleOfBox','الرحلات الجارية ')
 
 @section('logoutORback', route('showMainLayout'))
 
@@ -63,7 +63,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        <table id="AvailableTripsTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
+        <table id="CurrentTripsTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
             <thead>
             <tr>
                 <th>ID</th>
@@ -77,7 +77,7 @@
                 <th>رقم الباص </th>
                 <th>من</th>
                 <th>إلى</th>
-                <th>حجز يدوي</th>
+                <th>تتبع مسار الرحلة</th>
 
 
             </tr>
@@ -87,7 +87,5 @@
     </div>
 @endsection
 
-@section('content')
 
 
-@endsection
