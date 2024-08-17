@@ -70,4 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(NotificationToken::class);
     }
+    public function routeNorififcationForFcm($notification) {
+        return $this->notificationTokens()->pluck('device_token')->toArray();
+    }
 }

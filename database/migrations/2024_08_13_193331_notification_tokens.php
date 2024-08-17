@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('notification_tokens', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id');
-
+            $table->integer('User_id');
+            $table->foreign('User_id')->references('id')->on('users');
             $table->string('device_token')->unique();
-            $table->string('device_id');
-            $table->string('device_type');
+            $table->string('device_id')->nullable();
+            $table->string('device_type')->nullable();
             $table->unique(['device_id', 'device_type']);
 
             $table->timestamps();
