@@ -44,8 +44,6 @@ return [
     'user' => [
         'driver' => 'passport',
         'provider' => 'users',
-        'hash' => false,
-
     ],
 
     'driver' => [

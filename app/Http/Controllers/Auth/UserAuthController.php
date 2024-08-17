@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Trait\ApiResponse;
-use Illuminate\Auth\Events\Registered;
-
-
 
 class UserAuthController extends Controller
 {
@@ -36,12 +33,10 @@ class UserAuthController extends Controller
         }
 
         $request['password'] = Hash::make($request['password']);
-        $request['remember_token'] = Str::random(10);   
+        $request['remember_token'] = Str::random(10);
 
         $user = User::create($request->toArray());
         $token = $user->createToken('Password Grant Client')->accessToken;
-        event(new Registered($user));
-
 
 
         return $this->apiResponse([

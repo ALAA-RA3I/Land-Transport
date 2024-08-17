@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('year_experince');
             $table->integer('Branch_id');
             $table->foreign('Branch_id')->references('id')->on('branch');
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

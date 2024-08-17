@@ -1,31 +1,93 @@
 @extends('main.layout')
+@include('cdn.JQuery')
+@include('cdn.Search_datatable')
 <link href="{{asset('css/seconde.css')}}" rel="stylesheet">
 
-@section('titleOfPage','الحافلات')
+<script>
+    $(document).ready(function() {
+        var table = $('#AvailableTripsTable').DataTable({
+            processing: true,
+            serverSide: true,
+            pageLength: 10,  // Set the number of rows to display
+            lengthChange: false,  // Disable the ability to change the number of rows shown
+            ajax: '{{ route('showAvailableTrips') }}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'trip_num', name: 'trip_num' },
+                { data: 'date', name: 'date' },
+                { data: 'start_trip', name: 'start_trip' },
+                { data: 'end_trip', name: 'end_trip' },
+                { data: 'available_chair', name: 'available_chair' },
+                { data: 'cost', name: 'cost' },
+                { data: 'driver_name', name: 'driver_name' },
+                { data: 'bus_name', name: 'bus_name' },
+                { data: 'source', name: 'source' },
+                { data: 'destination', name: 'destination' },
+                {  data: 'id',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, row) {
+                        return `
+                  <a  href="{{ route('addManualBooking', '')}}/${data}" class="btn btn-dark" data-mdb-ripple-init>إضافة حجز يدوي</a>
+                    `;
+                    }
+                }
+            ],
+            responsive: true,
+        });
 
-@section('title','الحافلات')
+        // Hide the success message after 3 seconds
+        setTimeout(function() {
+            $('#successMessage').fadeOut('slow');
+        }, 3000); // 3 seconds
+    });
+</script>
+
+@section('titleOfPage','الرحلات المتوفرة')
+
+@section('title','الحافلات المتوفرة')
+@section('titleOfBox','الرحلات المتوفر بها مقاعد ')
+
 
 @section('logoutORback', route('showMainLayout'))
 
 @section('buttonText', 'عودة للقائمة الرئيسية')
 
 
-@if ($errors->any())
-<script>    
-    let errorMessages = '';
-    @foreach ($errors->all() as $error)
-        errorMessages += '{{ $error }}\n';
-    @endforeach
-    alert(errorMessages);
-</script>
-@endif
-
-
 @section('content')
-    <div class="content">
+    <div class="container" >
+        <!-- Success message -->
+        @if (session('success'))
+            <div id="successMessage" class="alert alert-success" style="width:400px; position: relative; top: 100px ;right: 300px;z-index: 1050; ">
+                {{ session('success') }}
+            </div>
+        @endif
+        <table id="AvailableTripsTable" class="table table-striped nowrap" style="width:500px ;font-size:medium  ">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>رقم الرحلة</th>
+                <th>تاريخ الرحلة</th>
+                <th>وقت الانطلاق </th>
+                <th>وقت الوصول </th>
+                <th>المقاعد المتوفرة</th>
+                <th>التكلفة</th>
+                <th>السائق</th>
+                <th>رقم الباص </th>
+                <th>من</th>
+                <th>إلى</th>
+                <th>حجز يدوي</th>
 
-        {{-- replace 5 with the real tripID  --}}
-        <a href="{{route('addManualBooking',13)}}"><li>حجز يدوي</li></a>  
+
+            </tr>
+            </thead>
+        </table>
 
     </div>
+@endsection
+
+@section('content')
+
+
 @endsection

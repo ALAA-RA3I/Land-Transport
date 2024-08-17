@@ -21,13 +21,11 @@ return new class extends Migration
             $table->integer('Trip_id');
             $table->enum('booking_type', ["Electronic","Manual"]);
             $table->integer('Branch_id');
-            $table->string('charge_id');
+            $table->string('charge_id')->nullable();
             $table->foreign('User_id')->references('id')->on('users');
             $table->foreign('Manager_id')->references('id')->on('manager');
-            $table->foreign('Trip_id')->references('id')->on('trips');
+            $table->foreign('Trip_id')->references('id')->on('trips')->onDelete('cascade');
             $table->foreign('Branch_id')->references('id')->on('branch');
-
-
 
         });
 

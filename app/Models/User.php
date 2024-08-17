@@ -9,11 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\NotificationToken; // Make sure this import is present
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
 
     use HasApiTokens, HasFactory, Notifiable;
@@ -59,7 +58,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-        
     }
 
     public function booking() {

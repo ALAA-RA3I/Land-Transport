@@ -5,17 +5,23 @@
     .submit{
     padding: 5px;
     border-radius: 5px;
-    background-color: #eee;
-    border: 2px solid #010101;
-    width: fit-content;
+    background-color: #333;
+    border: 2px solid #333;
+    color: white;
+    border-radius:15px; 
+    width: 250px;
     position: absolute;
-    top:110px;
-    right:85%;
+    top:105px;
+    right:70%;
     cursor: pointer;
     text-align:center;
-    color: #010101;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
+    }
+
+    .submit:hover{
+        background-color: #eee;
+        color: #333;
     }
 </style>
