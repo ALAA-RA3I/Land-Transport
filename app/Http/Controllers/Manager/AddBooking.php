@@ -25,7 +25,13 @@ class AddBooking extends Controller
 
     public function addManualBooking($tripID)
     {
-        return view('addManualBooking', compact('tripID'));
+        $trip = Trip::with('bus')->findOrFail($tripID);
+        $totalChairs = range(1, $trip->bus->chair_count);
+        $chairsAvaliable = Ticket::whereHas('booking', function($query) use($tripID){
+            $query->where('Trip_id',$tripID);
+        })->pluck('chair_num')->toArray();;
+        $availableChairs = array_diff($totalChairs, $chairsAvaliable);
+        return view('addManualBooking', compact('tripID','availableChairs'));
     }
 
     public function addBooking(Request $request, $tripID)
@@ -40,13 +46,14 @@ class AddBooking extends Controller
             Log::error("Trip not found: " . $msg->getMessage());
             return redirect()->route('addManualBooking', ['tripID' => $tripID])->with('fail', 'tripID doesnt exist');
         }
-        if($tripInfo->status === "Done"){
+        if($tripInfo->status === "Done" || $tripInfo->status === "Progress" ){
             return redirect()->route('addManualBooking', ['tripID' => $tripID])->with('fail', 'trip is done');
         }
 
         $bus = $tripInfo->bus; 
         $maxChairs = $bus->chair_count; // يقصد به العدد الكلي للمقاعد 
         $busId= $bus->bus_number;
+        $tripDate = $tripInfo->date; 
 
         // Validate the request data
         $request->validate([
@@ -91,7 +98,7 @@ class AddBooking extends Controller
                             }
 
                         Ticket::create([
-                            'tickets_num' => $this->generateTicketNumber($tripID,$request->seatNumber,$busId),
+                            'tickets_num' => $this->generateTicketNumber($tripID,$request->seatNumber,$busId,$tripDate),
                             'first_name' => $request->firstName,
                             'mid_name' =>  $request->middleName,
                             'last_name' => $request->lastName,
@@ -118,9 +125,7 @@ class AddBooking extends Controller
         return redirect()->route('addManualBooking', ['tripID' => $tripID])->with('success', 'Booking added successfully');
     }
 
-private function generateTicketNumber($tripId, $chair_num, $bus) {
-    $date = Carbon::now()->format('Y-m-d');
-    return  $date . $tripId . $bus . $chair_num;
-    
+    private function generateTicketNumber($tripId, $chair_num, $bus , $tripDate) {
+        return  $tripDate . "-" . $tripId . "-" . $bus . "-" . $chair_num;
     }
 }

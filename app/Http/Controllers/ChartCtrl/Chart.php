@@ -60,7 +60,7 @@ class Chart extends Controller
         ->setLabels(array_keys($ageGroups))
         ->setDataset(array_values($ageGroups))
         ->setHeight(500)
-        ->setWidth(500)
+        ->setWidth(700)
         ->setColors(['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845']);
         return view('charts.age',compact('chart'));
     }
@@ -90,7 +90,7 @@ class Chart extends Controller
             ->setDataset(array_values($timeGroups))
             ->setColors(['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845',"#17A2B8","#28A745",'#6C757D '])
             ->setHeight(500)
-            ->setWidth(500);
+            ->setWidth(700);
 
             return view('charts.time',compact('chart'));
 

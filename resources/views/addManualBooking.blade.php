@@ -58,9 +58,9 @@
 
     <label for="seatNumber">رقم المقعد</label>
     <select name="seatNumber" id="seatNumber">
-        @for ($i = 1; $i <= 10; $i++) 
-            <option value="{{ $i }}" {{ old('seatNumber') == $i ? 'selected' : '' }}> {{ $i }}</option>
-        @endfor
+        @foreach($availableChairs as $chair)
+        <option value="{{ $chair }}">{{ $chair }}</option>
+        @endforeach
     </select>
 
     <button type="submit" class="submit">حجز</button>

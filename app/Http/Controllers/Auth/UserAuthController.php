@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Trait\ApiResponse;
-
+use Illuminate\Auth\Events\Registered;
 class UserAuthController extends Controller
 {
     use ApiResponse;
@@ -37,7 +37,7 @@ class UserAuthController extends Controller
 
         $user = User::create($request->toArray());
         $token = $user->createToken('Password Grant Client')->accessToken;
-
+        event(new Registered($user));
 
         return $this->apiResponse([
             'token' => $token,

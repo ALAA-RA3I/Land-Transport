@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\User\AddFavouriteTime;
 use App\Http\Controllers\User\BrowseTrips;
 use App\Http\Controllers\User\controlBooking;
+use App\Http\Controllers\User\Profile;
 use App\Http\Controllers\User\UserActions;
 use App\Models\Manager;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +22,8 @@ Route::middleware('auth:user')->group(function () {
 
 Route::post('register',[UserAuthController::class,'register'])->name('UserRegister');
 Route::post('login',[UserAuthController::class,'login'])->name('UserLogin');
+Route::get('showProfile',[Profile::class,'showProfile'])->name('showProfile');
+Route::put('updateProfile',[Profile::class,'updateProfile'])->name('updateProfile');
 
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
@@ -33,6 +37,24 @@ Route::post('/calcBookingCost/{id}',[UserActions::class,'calculateBookingCost'])
 
 Route::get('/showMyBookings',[controlBooking::class,'showAllBooking'])->name('showAllBooking');
 Route::get('/cancelMyBookings/{id}',[controlBooking::class,'cancelBooking'])->name('cancelBooking');
+Route::get('/showTickets/{id}',[controlBooking::class,'showTickets'])->name('showTickets');
+
+// Email Verification Routes
+Route::middleware('auth:user')->group(function () {
+    Route::get('/email/verify', function () {
+        return response()->json(['message' => 'Please verify your email address.'], 403);
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return response()->json(['message' => 'Email verified successfully!'], 200);
+    })->middleware(['signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return response()->json(['message' => 'Verification link sent!'], 200);
+    })->middleware('throttle:6,1')->name('verification.send');
+});
 
 /////////////// method to add manager  instead of insert in my sql this to test the project not main in out project ///////////////////
 Route::post('/manage_store',function (Request $request){

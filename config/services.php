@@ -38,6 +38,10 @@ return [
     'stripe' =>[
         'key' =>env('STRIPE_KEY'),
         'test'=> env('STRIPE_SECRET_TEST'),
-    ]
+    ],
+
+    'firebase' => [
+    'credentials' => env('FIREBASE_CREDENTIALS'),
+],
 
 ];

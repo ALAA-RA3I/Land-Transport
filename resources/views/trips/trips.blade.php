@@ -32,7 +32,7 @@
 @section('linkValue','إضافة رحلة استثنائية')
 
 @section('route', route('addTripInfo'))
-<a href="#">
+<a href="{{route('showDoneTrips')}}">
 <div class="card text-bg-primary" style="width: 20% ; position: absolute ; top: 200px ; right: 550px ;border-radius: 5px;border-color: blanchedalmond">
 <div class="card-header" style="background-color:#e1ad21; color:#2d3748 ;font-weight: bolder">{{\App\Models\Trip::where('status','Done')->count()}}</div>
 <div class="card-body" style="background-color:#f8c62d ;color: #2d3748 ;font-weight: bolder">
@@ -42,7 +42,7 @@
 </div>
 </a>
 
-<a href="#">
+<a href="{{route('showWaitTrips')}}">
 <div class="card text-bg-primary" style="width: 20% ; position: absolute ; top: 200px ; right: 1100px ; border-radius: 5px; border-color: blanchedalmond">
     <div class="card-header" style="background-color:#e1ad21  ; color: #2d3748 ;font-weight: bolder" >{{\App\Models\Trip::where('status','Wait')->count()}}</div>
     <div class="card-body" style="background-color:#f8c62d ; color: #2d3748 ;font-weight: bolder">

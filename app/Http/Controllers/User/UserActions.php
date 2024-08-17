@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Stripe\Charge;
 use Stripe\Stripe;
+use App\Notifications\TestNotification;
 
 class UserActions extends Controller
 {
@@ -33,7 +34,7 @@ class UserActions extends Controller
 
         Stripe::setApiKey(config('services.stripe.test'));
 
-        if($tripInfo->status === "Done"){
+        if($tripInfo->status === "Done" || $tripInfo->status === "Progress"){
             return $this->apiResponse('','الرحلة قد انتهت،لا يمكنك الحجز فيها',409);
         }
         $today = Carbon::now()->format('Y-m-d');
@@ -175,5 +176,15 @@ class UserActions extends Controller
             $cost = count($passengers) * $tripInfo->cost;
             return $this->apiResponse($cost,'التكلفة الاجمالية للرحلة',200);
         }
+    }
+    public function sendTestNotification()
+    {
+        // Assuming you have a user with a valid FCM registration token
+        $user = Auth::guard('user')->user()->id; 
+
+        // Send notification
+        $user->notify(new TestNotification());
+
+        return response()->json(['message' => 'Notification sent!']);
     }
 }
