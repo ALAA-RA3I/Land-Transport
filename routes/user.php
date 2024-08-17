@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\User\AddFavouriteTime;
 use App\Http\Controllers\User\BrowseTrips;
 use App\Http\Controllers\User\controlBooking;
+use App\Http\Controllers\User\Profile;
 use App\Http\Controllers\User\UserActions;
 use App\Models\Manager;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,8 @@ Route::middleware('auth:user')->group(function () {
 
 Route::post('register',[UserAuthController::class,'register'])->name('UserRegister');
 Route::post('login',[UserAuthController::class,'login'])->name('UserLogin');
+Route::get('showProfile',[Profile::class,'showProfile'])->name('showProfile');
+Route::put('updateProfile',[Profile::class,'updateProfile'])->name('updateProfile');
 
 
 Route::post('/showTrips',[BrowseTrips::class,'showTripsByDate'])->name('showTripsBySpecificDate');
