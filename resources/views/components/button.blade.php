@@ -8,11 +8,11 @@
     background-color: #333;
     border: 2px solid #333;
     color: white;
-    border-radius:15px; 
+    border-radius:15px;
     width: 300px;
     position: absolute;
-    top:105px;
-    right:68%;
+    top:115px;
+    right:75%;
     cursor: pointer;
     text-align:center;
     text-decoration: none;

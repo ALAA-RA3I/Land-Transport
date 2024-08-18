@@ -9,7 +9,7 @@
 
 @component('components.button')
     @section('linkValue', 'إضافة جدولة رحلات')
-    @section('route', route('showScheduledForm'))
+    @section('route', route('addScheduledTrip'))
 @endcomponent
 
 
@@ -21,11 +21,9 @@
 @section('title','رحلات')
 @section('titleOfBox','استعراض أيام الجدولة')
 
-
-
 <div class="all">
     <div class="allDivs" style="display: flex; flex-wrap: wrap; justify-content: space-evenly; margin-top:30px">
-        <a href="{{route('showSaturdayTrip','saturday')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+        <a href="{{route('showSchedulingTrips','السبت')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">السبت</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -34,8 +32,8 @@
                 </div>
             </div>
         </a>
-    
-        <a href="{{route('showSundayTrip' , 'sunday')}}" style="width: 40%; margin-bottom: 20px;text-decoration: none; color: inherit;">
+
+        <a href="{{route('showSchedulingTrips' , 'الأحد')}}" style="width: 40%; margin-bottom: 20px;text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الاحد</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -44,8 +42,8 @@
                 </div>
             </div>
         </a>
-    
-        <a href="{{route('showMondayTrip' , 'monday')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+
+        <a href="{{route('showSchedulingTrips' , 'الأثنين')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الاثنين</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -54,8 +52,8 @@
                 </div>
             </div>
         </a>
-    
-        <a href="{{route('showThesdayTrip' , 'thesday')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+
+        <a href="{{route('showSchedulingTrips' , 'الثلاثاء')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الثلاثاء</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -64,8 +62,8 @@
                 </div>
             </div>
         </a>
-    
-        <a href="{{route('showWednesdayTrip' , 'wednesday')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+
+        <a href="{{route('showSchedulingTrips' , 'الأربعاء')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الاربعاء</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -75,7 +73,7 @@
             </div>
         </a>
 
-        <a href="{{route('showThursdayTrip' , 'thursday')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+        <a href="{{route('showSchedulingTrips' , 'الخميس')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الخميس</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -85,7 +83,7 @@
             </div>
         </a>
 
-        <a href="{{route('showFridayTrip' , 'friday')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+        <a href="{{route('showSchedulingTrips' , 'الجمعة')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الجمعة</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -132,7 +130,7 @@ window.onload = function() {
 document.getElementById("toggle-switch").addEventListener("change", function() {
     const label = document.getElementById("toggle-label");
     const statusValue = document.getElementById("status-value");
-    
+
     if (this.checked) {
         label.textContent = "تشغيل";
         statusValue.value = "1";

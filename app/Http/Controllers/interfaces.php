@@ -26,35 +26,6 @@ class interfaces extends Controller
         return view('main.navBarLayout');
     }
 
-    public function showSchedulingSection() {
-        return view('trips.scheduling');
-    }
 
-    public function showSaturdayTrip($day){
-        return view('trips.'. $day);
-    }
-    
-    public function showSundayTrip($day){
-        return view('trips.' . $day);
-    }
 
-    public function showMondayTrip($day){
-        return view('trips.' . $day);
-    }
-
-    public function showThesdayTrip($day){
-        return view('trips.' . $day);
-    }
-
-    public function showWednesdayTrip($day){
-        return view('trips.' . $day);
-    }
-
-    public function showThursdayTrip($day){
-        return view('trips.' . $day);
-    }
-
-    public function showFridayTrip($day){
-        return view('trips.' . $day);
-    }
 }

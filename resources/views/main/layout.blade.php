@@ -32,7 +32,7 @@
                 </div>
             <div class="navigation">
                 <ul class="links">
-                    <a href="{{route('showTripsSection')}}"><li>رحلات</li></a>
+                    <a href="{{route('showTodayTrips')}}"><li> رحلات اليوم</li></a>
                     <a href="{{route('showTickets')}}"><li>تذاكر</li></a>
                     <a href="{{route('showCopouns')}}"><li>كوبونات</li></a>
                     <a href="{{ route('statistcsSection') }}"><li>إحصائيات</li></a>

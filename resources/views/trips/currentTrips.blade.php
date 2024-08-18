@@ -37,9 +37,7 @@
         });
 
         // Hide the success message after 3 seconds
-        setTimeout(function() {
-            $('#successMessage').fadeOut('slow');
-        }, 3000); // 3 seconds
+
     });
 </script>
 

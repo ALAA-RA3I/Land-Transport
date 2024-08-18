@@ -9,8 +9,10 @@ use App\Http\Controllers\Manager\Copouns;
 use App\Http\Controllers\Manager\DisplayTrips;
 use App\Http\Controllers\Manager\Drivers;
 use App\Http\Controllers\ChartCtrl\Chart;
+use App\Http\Controllers\Manager\SchedulingsTrips;
 use App\Http\Controllers\Manager\Tickets;
 use App\Models\Booking;
+use App\Models\ShcedulingTime;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,20 +68,15 @@ Route::put('/updateWaitTrip/{id}', [Trip::class, 'updateTrip'])->name('updateWai
 Route::delete('/deleteWaitTrip/{id}', [Trip::class, 'deleteTrip'])->name('deleteWaitTrip');
 Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
 Route::get('/availableTrips',[DisplayTrips::class,'displayAvailableTrips'])->name('showAvailableTrips');
+Route::get('/TodayTrips',[DisplayTrips::class,'displayMyDayTrips'])->name('showTodayTrips');
 
-Route::get('/showSchedulingSection',[interfaces::class,'showSchedulingSection'])->name('showSchedulingSection');
-//each day
-Route::get('/showSaturdaySchedulingSection/{day}',[interfaces::class,'showSaturdayTrip'])->name('showSaturdayTrip');
-Route::get('/showSundaySchedulingSection/{day}',[interfaces::class,'showSundayTrip'])->name('showSundayTrip');
-Route::get('/showMondaySchedulingSection/{day}',[interfaces::class,'showMondayTrip'])->name('showMondayTrip');
-Route::get('/showThesdaySchedulingSection/{day}',[interfaces::class,'showThesdayTrip'])->name('showThesdayTrip');
-Route::get('/showWednesdaySchedulingSection/{day}',[interfaces::class,'showWednesdayTrip'])->name('showWednesdayTrip');
-Route::get('/showThursdaySchedulingSection/{day}',[interfaces::class,'showThursdayTrip'])->name('showThursdayTrip');
-Route::get('/showFridaySchedulingSection/{day}',[interfaces::class,'showFridayTrip'])->name('showFridayTrip');
 
-Route::get('/scheduledSectionSection',[Trip::class,'SchedulingForm'])->name('showScheduledForm');
-Route::post('/addScheduledTripInformation',[Trip::class,'addScheduledInfo'])->name('ScheduledInfo');
-
+////////////////// scheduling Trips ///////////////////////////////
+Route::get('/showSchedulingSection',[SchedulingsTrips::class,'showSchedulingSection'])->name('showSchedulingSection');
+Route::get('/showSchedulingTripsSpecific/{day}',[SchedulingsTrips::class,'showSchedulingTripsOfDay'])->name('showSchedulingTrips');
+Route::delete('/deleteSchedulingTripSpecific/{day}',[SchedulingsTrips::class,'deleteSchedulingTrip'])->name('deleteSchedulingTrip');
+Route::get('/addScheduledTrip',[SchedulingsTrips::class,'addScheduledTrip'])->name('addScheduledTrip');
+Route::post('/storeScheduledTripInfo',[SchedulingsTrips::class,'storeScheduledInfo'])->name('storeScheduledInfo');
 
 ////////////////////// tickets //////////////////////////////////
 Route::get('/displayTickets',[Tickets::class,'showTickets'])->name('showTickets');
@@ -87,9 +84,6 @@ Route::get('/displayWaitTickets/{id}',[Tickets::class,'showTicketsOfWaitTrip'])-
 Route::get('/displayDoneTickets/{id}',[Tickets::class,'showTicketsOfDoneTrip'])->name('showDoneTripTickets');
 Route::get('/ConfirmPassengerAttendance/{id}',[Tickets::class,'confirmPassengerAttendance'])->name('ConfirmPassengerAttendance');
 Route::delete('/cancelTicket/{id}',[Tickets::class,'cancelTicket'])->name('cancelTicket');
-
-
-
 
 
 

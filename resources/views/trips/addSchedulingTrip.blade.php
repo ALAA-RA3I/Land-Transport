@@ -1,6 +1,15 @@
 @extends('main.layout')
+@include('cdn.JQuery')
+@include('cdn.Search_datatable')
+<link href="{{asset('css/seconde.css')}}" rel="stylesheet">
 
-<link href="{{asset('css/seconde.css')}}" rel="stylesheet"> 
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#successMessage').fadeOut('slow');
+        }, 3000); // 3 seconds
+    });
+</script>
 
 
 @section('titleOfPage',' إضافة معلومات جدولة الرحلات')
@@ -10,35 +19,42 @@
 @section('buttonText', 'عودة للقائمة الرئيسية')
 
 
+
 @section('content')
+
+    @if (session('success'))
+        <div id="successMessage" class="alert alert-success" style="width:400px; position: absolute; top: 100px ;right: 800px;z-index: 1050; ">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="all">
-        <form action="{{ route('ScheduledInfo') }}" method="POST">
+        <form action="{{ route('storeScheduledInfo') }}" method="POST">
         @csrf
         <label for="day">أختر يوماً</label>
         <select name="day_name" id="">
-            <option value="sunday">الأحد</option>
-            <option value="monday">الأثنين</option>
-            <option value="thesday">الثلاثاء</option>
-            <option value="wednesday">الأربعاء</option>
-            <option value="thursday">الخميس</option>
-            <option value="friday">الجمعة</option>
-            <option value="saturday">السبت</option>
+            <option value="الأحد">الأحد</option>
+            <option value="الأثنين">الأثنين</option>
+            <option value="الثلاثاء">الثلاثاء</option>
+            <option value="الأربعاء">الأربعاء</option>
+            <option value="الخميس">الخميس</option>
+            <option value="الجمعة">الجمعة</option>
+            <option value="السبت">السبت</option>
         </select>
         <label for="start-trip">أدخل وقت الانطلاق</label>
-        <input 
+        <input
             type="time"
             name="start_trip"
             id="start-trip"
         >
         <label for="end-trip">أدخل وقت الوصول</label>
-        <input 
+        <input
             type="time"
             name="end_trip"
             id="end-trip"
         >
         <label for="driver">أختر السائق</label>
-        <select 
-            name="Driver_id" 
+        <select
+            name="Driver_id"
             id="driver"
         >
         @foreach ($drivers as $driver)
@@ -46,8 +62,8 @@
         @endforeach
         </select>
         <label for="bus">اختر الحافلة</label>
-        <select 
-            name="Bus_id" 
+        <select
+            name="Bus_id"
             id="bus"
         >
         @foreach($buses as $bus)
@@ -61,13 +77,13 @@
             @endforeach
         </select>
         <label for="cost">أدخل تكلفة المقعد</label>
-            <input 
+            <input
                 type="number"
                 name="cost"
                 step="500"
                 id="cost"
             >
-            <input 
+            <input
             type="submit"
             value="إضافة"
             class="submit"
