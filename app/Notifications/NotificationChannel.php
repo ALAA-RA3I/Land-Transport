@@ -10,6 +10,8 @@ use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
 use NotificationChannels\Fcm\Resources\Notification as NotificationResource;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Messaging;
+use Kreait\Firebase\Factory;
+
 
 abstract class NotificationChannel extends Notification
 {
@@ -17,13 +19,9 @@ abstract class NotificationChannel extends Notification
 
     public function via($notifiable)
     {
-        $this->notifiable = $notifiable;
-
-        return [
-            DatabaseChannel::class,
-            FcmChannel::class,
-        ];
+        return [FcmChannel::class];
     }
+
     public function toFcmtest($notifiable)
     {
         $messaging = app(FcmMessage::class);
@@ -37,31 +35,24 @@ abstract class NotificationChannel extends Notification
 
     public function toFcm($notifiable): FcmMessage
     {
-        $this->notifiable = $notifiable;
-
         return (new FcmMessage(notification: new FcmNotification(
-            title: $this->getTitle(),
-            body: $this->getBody(),
-            image: $this->getImage(),
-        )))
-            ->notification($this->getNotification())
-            ->data($this->getFcmData())
+                title: 'hi from back',
+                body: 'success notify .',
+                
+            )))
+            ->data(['data1' => 'value', 'data2' => 'value2'])
             ->custom([
                 'android' => [
                     'notification' => [
                         'color' => '#0A0A0A',
-                        'channel_id' => 'test', // ex: project name 
-                        'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
-                        'image' => $this->getImage(),
                     ],
                     'fcm_options' => [
-                        'analytics_label' => 'android-'.$this->getCode(),
+                        'analytics_label' => 'analytics',
                     ],
                 ],
                 'apns' => [
                     'fcm_options' => [
-                        'analytics_label' => 'ios-'.$this->getCode(),
-                        'image' => $this->getImage(),
+                        'analytics_label' => 'analytics',
                     ],
                 ],
             ]);
