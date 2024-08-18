@@ -3,18 +3,24 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "prod": "npm run production",
+        "production": "mix --production"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "axios": "^1.6.4",
         "bootstrap": "^5.2.3",
         "laravel-datatables-vite": "^0.5.2",
+        "laravel-mix": "^6.0.49",
         "laravel-vite-plugin": "^1.0",
+        "resolve-url-loader": "^5.0.0",
         "sass": "^1.56.1",
+        "sass-loader": "^12.1.0",
         "vite": "^5.0"
     },
     "dependencies": {
+        "firebase": "^10.13.0",
         "jquery": "^3.6.4",
         "popper.js": "^1.16.1"
     }

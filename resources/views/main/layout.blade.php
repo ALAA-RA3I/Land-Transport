@@ -12,6 +12,7 @@
 
 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/firebase.js') }}"></script>
 
 
 </head>
