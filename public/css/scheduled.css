@@ -1,0 +1,86 @@
+.day{
+    position: absolute;
+    top: 110px;
+    right: 1090px;
+}
+
+.all{
+    position: absolute;
+    top: 150px;
+    right: 350px;
+}
+
+.container {
+position: absolute;
+top: 85%;
+right: 200px;
+}
+
+.switch {
+position: relative;
+display: flex;
+align-items: center;
+gap: 15px;
+color: #2d3748;
+font-weight: bold;
+flex-direction: row-reverse;
+width: fit-content;
+background-color: #e1ad21;
+padding: 15px 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+border: 1px solid #ccc;
+margin-right: 120px
+}
+
+.switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.slider {
+position: relative;
+display: inline-block;
+width: 60px;
+height: 34px;
+cursor: pointer;
+background-color: #333; 
+transition: .4s;
+border-radius: 34px;
+}
+
+.slider:before {
+position: absolute;
+content: "";
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+
+/* عند تفعيل الزر */
+input:checked + .slider {
+background-color: #eee; 
+}
+
+input:checked + .slider:before {
+background-color: #333; 
+transform: translateX(26px);
+}
+
+.day-label {
+font-weight: bold;
+color: #333;
+}
+
+.day-select {
+padding: 5px;
+border-radius: 5px;
+border: 1px solid #ccc;
+background-color: #fff;
+cursor: pointer;
+}

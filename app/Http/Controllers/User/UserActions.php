@@ -47,7 +47,9 @@ class UserActions extends Controller
         $freeChairs = 0; 
         $discount =0 ;
         $totalPassengers = count($passengers);
-        $coupon = CompanyCoupon::get();   
+        $coupon = CompanyCoupon::get();
+        $tripInfo = Trip::where('id', $tripId)->lockForUpdate()->first();
+
 
         $request->validate([
             'passengers.*.first_name' => 'required |string',

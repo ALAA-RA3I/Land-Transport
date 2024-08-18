@@ -22,7 +22,7 @@
                 <img src="{{asset('Images/325459617_681733463736687_8393534721802801786_n.png')}}">
                 <ul class="choises">
                     <a href="{{ route ('showTripsSection') }}"><li>الرحلات</li></a>
-                    <a href="#"><li>جدولة الرحلات</li></a>
+                    <a href="{{route('showSchedulingSection')}}"><li>جدولة الرحلات</li></a>
                     <a href="{{route('showAvaliableTripsForBooking')}}"><li>اضافة حجز يدوي</li></a>
                     <a href="{{route('showCurrentTrips')}}"><li>الرحلات الجارية الان</li></a>
                     <a href="{{route('showBusSection')}}"><li>الحافلات</li></a>
