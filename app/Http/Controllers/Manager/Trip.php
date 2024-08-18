@@ -117,6 +117,17 @@ class Trip extends Controller
         $trip = \App\Models\Trip::findOrFail($id);
         $trip->delete();
         return redirect()->back()->with('success', 'تم حذف الرحلة بنجاح');
+    }
 
+    public function SchedulingForm(){
+        $manager=Auth::guard('manager-web')->user();
+        $branchTitle = $manager->branch->office_address;
+        $buses = Bus::all();
+        $places = FromTo::where('source', $branchTitle)->pluck('destination','id');
+        $drivers = Driver::all();
+        return view('trips.addSchedulingTrip')
+            ->with('buses',$buses)
+            ->with('places',$places)
+            ->with('drivers',$drivers);
     }
 }

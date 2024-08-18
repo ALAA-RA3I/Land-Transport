@@ -9,10 +9,10 @@
     border: 2px solid #333;
     color: white;
     border-radius:15px; 
-    width: 250px;
+    width: 300px;
     position: absolute;
     top:105px;
-    right:70%;
+    right:68%;
     cursor: pointer;
     text-align:center;
     text-decoration: none;

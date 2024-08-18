@@ -67,6 +67,19 @@ Route::delete('/deleteWaitTrip/{id}', [Trip::class, 'deleteTrip'])->name('delete
 Route::get('/followTrip',[DisplayTrips::class,'followCurrenTrips'])->name('FollowTripOnMap');
 Route::get('/availableTrips',[DisplayTrips::class,'displayAvailableTrips'])->name('showAvailableTrips');
 
+Route::get('/showSchedulingSection',[interfaces::class,'showSchedulingSection'])->name('showSchedulingSection');
+//each day
+Route::get('/showSaturdaySchedulingSection/{day}',[interfaces::class,'showSaturdayTrip'])->name('showSaturdayTrip');
+Route::get('/showSundaySchedulingSection/{day}',[interfaces::class,'showSundayTrip'])->name('showSundayTrip');
+Route::get('/showMondaySchedulingSection/{day}',[interfaces::class,'showMondayTrip'])->name('showMondayTrip');
+Route::get('/showThesdaySchedulingSection/{day}',[interfaces::class,'showThesdayTrip'])->name('showThesdayTrip');
+Route::get('/showWednesdaySchedulingSection/{day}',[interfaces::class,'showWednesdayTrip'])->name('showWednesdayTrip');
+Route::get('/showThursdaySchedulingSection/{day}',[interfaces::class,'showThursdayTrip'])->name('showThursdayTrip');
+Route::get('/showFridaySchedulingSection/{day}',[interfaces::class,'showFridayTrip'])->name('showFridayTrip');
+
+Route::get('/scheduledSectionSection',[Trip::class,'SchedulingForm'])->name('showScheduledForm');
+Route::post('/addScheduledTripInformation',[Trip::class,'addScheduledInfo'])->name('ScheduledInfo');
+
 
 ////////////////////// tickets //////////////////////////////////
 Route::get('/displayTickets',[Tickets::class,'showTickets'])->name('showTickets');
