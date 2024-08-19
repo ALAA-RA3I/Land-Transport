@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ManagerAuthController;
 use App\Http\Controllers\interfaces;
 use App\Http\Controllers\Manager\AddBooking;
 use App\Http\Controllers\Manager\Bus;
+use App\Http\Controllers\Manager\ControlScheduling;
 use App\Http\Controllers\Manager\Copouns;
 use App\Http\Controllers\Manager\DisplayTrips;
 use App\Http\Controllers\Manager\Drivers;
@@ -12,8 +13,10 @@ use App\Http\Controllers\ChartCtrl\Chart;
 use App\Http\Controllers\Manager\SchedulingsTrips;
 use App\Http\Controllers\Manager\Tickets;
 use App\Models\Booking;
+use App\Models\FavoriteTime;
 use App\Models\ShcedulingTime;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Manager\Trip;
@@ -72,6 +75,10 @@ Route::get('/TodayTrips',[DisplayTrips::class,'displayMyDayTrips'])->name('showT
 
 
 ////////////////// scheduling Trips ///////////////////////////////
+Route::get('/onScheduling', [ControlScheduling::class, 'On'])->name('Onscheduling');
+Route::get('/offScheduling', [ControlScheduling::class, 'Off'])->name('Offscheduling');
+
+
 Route::get('/showSchedulingSection',[SchedulingsTrips::class,'showSchedulingSection'])->name('showSchedulingSection');
 Route::get('/showSchedulingTripsSpecific/{day}',[SchedulingsTrips::class,'showSchedulingTripsOfDay'])->name('showSchedulingTrips');
 Route::delete('/deleteSchedulingTripSpecific/{day}',[SchedulingsTrips::class,'deleteSchedulingTrip'])->name('deleteSchedulingTrip');
@@ -95,6 +102,9 @@ Route::get('/showStatistics', [interfaces::class, 'showStatistcsSection'])->name
 Route::get('/paymenrTypeStatistics', [Chart::class, 'showPaymentTypeStatistcs'])->name('paymentTypeStatistics');
 Route::get('/agesStatistics', [Chart::class, 'showAgeStatistcs'])->name('ageStatistics');
 Route::get('/timeStatistics', [Chart::class, 'showMostRequestedTimes'])->name('timeStatistics');
+
+
+
 
 
 

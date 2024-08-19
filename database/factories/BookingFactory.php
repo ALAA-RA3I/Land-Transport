@@ -19,7 +19,7 @@ class BookingFactory extends Factory
     {
         return [
             "User_id" => null,
-            "Manager_id" => 2,
+            "Manager_id" => 1,
             "date_of_booking" => $this->faker->date,
             "Trip_id" => fake()->numberBetween(5,48),
             "Booking_type" => $this->faker->randomElement( ["Electronic","Manual"]),

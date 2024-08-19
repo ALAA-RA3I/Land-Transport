@@ -25,7 +25,7 @@ class TicketFactory extends Factory
             'is_used' => $this->faker->boolean,
             'presence_travellet' => $this->faker->boolean,
             'age' => $this->faker->numberBetween(1,99),
-            'Booking_id' => $this->faker->numberBetween(1,50),
+            'Booking_id' => $this->faker->numberBetween(1,10),
         ];
     }
 }

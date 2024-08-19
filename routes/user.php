@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\UserAuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\User\AddFavouriteTime;
 use App\Http\Controllers\User\BrowseTrips;
 use App\Http\Controllers\User\controlBooking;
@@ -55,6 +56,16 @@ Route::middleware('auth:user')->group(function () {
         return response()->json(['message' => 'Verification link sent!'], 200);
     })->middleware('throttle:6,1')->name('verification.send');
 });
+
+
+
+////////////// Notification ///////
+Route::get('/show_unread_notification', [NotificationController::class, 'show_unread_notification']);
+Route::get('/show_old_notification', [NotificationController::class, 'show_old_notification']);
+Route::post('/send-notification', [NotificationController::class, 'sendNotification']);
+
+
+
 
 /////////////// method to add manager  instead of insert in my sql this to test the project not main in out project ///////////////////
 Route::post('/manage_store',function (Request $request){

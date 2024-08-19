@@ -32,13 +32,13 @@
         @csrf
         <label for="day">أختر يوماً</label>
         <select name="day_name" id="">
-            <option value="الأحد">الأحد</option>
             <option value="الأثنين">الأثنين</option>
             <option value="الثلاثاء">الثلاثاء</option>
-            <option value="الأربعاء">الأربعاء</option>
+            <option value="الاربعاء">الأربعاء</option>
             <option value="الخميس">الخميس</option>
             <option value="الجمعة">الجمعة</option>
             <option value="السبت">السبت</option>
+            <option value="الاحد">الاحد</option>
         </select>
         <label for="start-trip">أدخل وقت الانطلاق</label>
         <input

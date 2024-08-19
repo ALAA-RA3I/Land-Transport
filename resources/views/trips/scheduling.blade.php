@@ -1,7 +1,54 @@
 @extends('main.layout')
 @include('cdn.JQuery')
 @include('cdn.cdn')
-
+<style>
+    /* Add styles for the switch */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+    }
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+    .slider.round {
+        border-radius: 34px;
+    }
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link href="{{asset('css/scheduled.css')}}" rel="stylesheet">
 
 @section('titleOfPage','جدولة الرحلات')
@@ -20,7 +67,15 @@
 
 @section('title','رحلات')
 @section('titleOfBox','استعراض أيام الجدولة')
+<script>    setTimeout(function() {
+        $('#successMessage').fadeOut('slow');
+    }, 3000); // 3 seconds</script>
 
+@if (session('success'))
+    <div id="successMessage" class="alert alert-success" style="width:400px; position: absolute; top: 100px ;right: 800px;z-index: 1050; ">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="all">
     <div class="allDivs" style="display: flex; flex-wrap: wrap; justify-content: space-evenly; margin-top:30px">
         <a href="{{route('showSchedulingTrips','السبت')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
@@ -33,7 +88,7 @@
             </div>
         </a>
 
-        <a href="{{route('showSchedulingTrips' , 'الأحد')}}" style="width: 40%; margin-bottom: 20px;text-decoration: none; color: inherit;">
+        <a href="{{route('showSchedulingTrips' , 'الاحد')}}" style="width: 40%; margin-bottom: 20px;text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الاحد</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -63,7 +118,7 @@
             </div>
         </a>
 
-        <a href="{{route('showSchedulingTrips' , 'الأربعاء')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
+        <a href="{{route('showSchedulingTrips' , 'الاربعاء')}}" style="width: 40%; margin-bottom: 20px; text-decoration: none; color: inherit;">
             <div class="card text-bg-primary" style="width: 100%; border-radius: 5px; border-color: blanchedalmond;">
                 <div class="card-header" style="background-color:#e1ad21; color:#2d3748; font-weight: bolder">الاربعاء</div>
                 <div class="card-body" style="background-color:#f8c62d; color:#2d3748; font-weight: bolder">
@@ -94,51 +149,11 @@
         </a>
     </div>
     </div>
+<h4 style="position: absolute ;top: 30px ; right: 1125px ; color: #f8c62d" >التحكم بالجدولة</h4>
+
+<a href="{{route('Onscheduling')}}" class="btn btn-success" style="position: absolute ;top: 30px ; right: 1300px">تشغيل</a>
+<a href="{{route('Offscheduling')}}" class="btn btn-danger" style="position: absolute ;top: 30px ; right: 1380px">إيقاف</a>
+
 </div>
 
-<div class="container">
-    <label class="switch">
-        <input type="checkbox" id="toggle-switch">
-        <span class="slider round"></span>
-        <span>التحكم بحالةالرحلات</span>
-        <span id="toggle-label">إيقاف</span> <!-- النص الذي يعكس الحالة -->
-    </label>
-</div>
-<input type="hidden" id="status-value" name="status-value" value="0">
 
-<script>
-// عند تحميل الصفحة، تحقق من الحالة المخزنة في localStorage
-window.onload = function() {
-    const toggleSwitch = document.getElementById("toggle-switch");
-    const label = document.getElementById("toggle-label");
-    const statusValue = document.getElementById("status-value");
-
-    // استرجاع الحالة من localStorage
-    const savedState = localStorage.getItem("toggleState");
-
-    if (savedState === "1") {
-        toggleSwitch.checked = true;
-        label.textContent = "تشغيل";
-        statusValue.value = "1";
-    } else {
-        toggleSwitch.checked = false;
-        label.textContent = "إيقاف";
-        statusValue.value = "0";
-    }
-};
-// تحديث الحالة وحفظها في localStorage عند تغيير حالة الزر
-document.getElementById("toggle-switch").addEventListener("change", function() {
-    const label = document.getElementById("toggle-label");
-    const statusValue = document.getElementById("status-value");
-
-    if (this.checked) {
-        label.textContent = "تشغيل";
-        statusValue.value = "1";
-        localStorage.setItem("toggleState", "1");  // حفظ الحالة في localStorage
-    } else {
-        label.textContent = "إيقاف";
-        statusValue.value = "0";
-        localStorage.setItem("toggleState", "0");  // حفظ الحالة في localStorage
-    }
-});
-</script>

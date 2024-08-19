@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\trip as RequestsTrip;
 use App\Models\Bus;
 use App\Models\Driver;
+use App\Models\FavoriteTime;
 use App\Models\FromTo;
 use App\Models\ShcedulingTime;
 use App\Models\Trip as ModelsTrip;
+use App\Models\User;
+use App\Notifications\Notify;
 use Illuminate\Http\Request as httpRequest;
 use Carbon\Carbon;
 
@@ -67,7 +70,7 @@ class Trip extends Controller
             return redirect()->back()->withErrors(['msg' => 'لا يمكن إنشاء الرحلة الحالية، بسبب التداخل في المعلومات مع باقي الرحلات']);
         }
         // echo "no";
-        ModelsTrip::create([
+       $create = ModelsTrip::create([
             'date' => $request->input('date'),
             'start_trip' => $request->input('start_trip'),
             'end_trip' => $request->input('end_trip'),
@@ -79,6 +82,17 @@ class Trip extends Controller
             'Branch_id' => $branchId,
             'trip_type' => 'exceptional'
         ]);
+$users = User::all();
+foreach ($users as $user)
+{
+    $user->notify(new Notify('hi', 'his'));
+
+}
+
+        ///
+        ///
+     //    Fetch favorite times and convert the datetime to just date for comparison
+
 
         return redirect()->route('showTripsSection')->with('good', 'تمت إضافة رحلة جديدة بنجاح');
     }

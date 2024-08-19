@@ -12,7 +12,7 @@ class BookingSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Booking::factory()->count(50)->create();
+        \App\Models\Booking::factory()->count(10)->create();
 
     }
 }
